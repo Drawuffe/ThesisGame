@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class BuildingManager : MonoBehaviour
     //When the player is placing a blueprint, it can only be "Checked" in place when it matches with the surrounding tunnels
     //When a blueprint or tenant is dragged off of the inventory they inventory should disappear until the item is either placed or canceled
     
+
+    [SerializeField] List<ScriptableObject> scriptableObjects;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

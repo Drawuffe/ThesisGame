@@ -35,7 +35,7 @@ public class Draggable : MonoBehaviour
 
     }
 
-    private bool IsPointerOverHeader(Vector2 pointerPos)
+    private bool IsPointerOverObject(Vector2 pointerPos)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(panelTransform, pointerPos, uiCamera);
     }
@@ -43,7 +43,7 @@ public class Draggable : MonoBehaviour
     private void OnClickStarted(InputAction.CallbackContext ctx)
     {
         var pointerPos = pointerPosAction.action.ReadValue<Vector2>();
-        if (IsPointerOverHeader(pointerPos))
+        if (IsPointerOverObject(pointerPos))
         {
             _isDragging = true;
             ChangeParent();

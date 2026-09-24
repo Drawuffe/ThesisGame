@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 
 public class BuildingManager : MonoBehaviour
 {
+
 
     //BLUEPRINTS
     //list of all he available blueprints
@@ -25,17 +29,19 @@ public class BuildingManager : MonoBehaviour
     //When a blueprint or tenant is dragged off of the inventory they inventory should disappear until the item is either placed or canceled
     
 
-    [SerializeField] List<ScriptableObject> scriptableObjects;
+   //collect the random and tell the inventory what to instaniate
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Inventory inventory;
+
     void Start()
     {
-        
+        inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddBlueprint(string itemName, Sprite sprite, int cost)
     {
-        
+        Debug.Log("itemName = " + itemName + "sprite = " + sprite + "cost = " + cost);
+
+        inventory.CreateBlueprint(sprite);
     }
 }

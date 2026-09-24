@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96ab9fc4af882f34cb0a8773bc224647, type: 3}
-  m_Name: BlueprintTest
+  m_Name: Yellow
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
-  image: {fileID: 21300000, guid: 1b605d49f0c45aa4887239f91507a1de, type: 3}
-  description: Plasnjfbuosjnfhawfiunw
-  cost: 300
+  image: {fileID: 21300000, guid: 60d386277ae08474c8e23583477c55f4, type: 3}
+  itemName: Yellow
+  cost: 7
   workersNeeded: 2
   collected: 0

@@ -7,21 +7,22 @@ public class Draggable : MonoBehaviour
     [SerializeField] private InputActionReference clickAction;
     [SerializeField] private InputActionReference pointerPosAction;
     [SerializeField] private RectTransform panelTransform;
-    [SerializeField] private RectTransform canvasTransform;
-    [SerializeField] private RectTransform newParent;
-    [SerializeField] private RectTransform viewport;
+    public RectTransform canvas;
+    public RectTransform parent;
     public Camera uiCamera;
+
 
 
     private Vector2 _offset;
     private bool _isDragging;
-    
+
 
     private void OnEnable()
     {
         clickAction.action.started += OnClickStarted;
         clickAction.action.canceled += OnClickCanceled;
         pointerPosAction.action.performed += OnPointMoved;
+  
 
     }
 
@@ -59,9 +60,10 @@ public class Draggable : MonoBehaviour
 
     private void OnPointMoved(InputAction.CallbackContext ctx)
     {
+        
         if (!_isDragging) return;
         var  pointerPos = ctx.ReadValue<Vector2>();
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, pointerPos, uiCamera, out var localPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pointerPos, uiCamera, out var localPos);
         panelTransform.anchoredPosition = localPos + _offset;
     }
 
@@ -70,8 +72,9 @@ public class Draggable : MonoBehaviour
         Vector3 worldPos = panelTransform.position;
         Vector2 worldSize = panelTransform.rect.size;
         Vector3 worldScale = panelTransform.lossyScale;
+        
 
-        panelTransform.SetParent(newParent, worldPositionStays: true);
+        panelTransform.SetParent(parent, worldPositionStays: true);
 
         Vector2 newSize = new Vector2(worldSize.x / panelTransform.lossyScale.x, worldSize.y / panelTransform.lossyScale.y);
 

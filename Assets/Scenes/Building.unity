@@ -2264,8 +2264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e65408039067284c9fae561bc4e0bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  image: {fileID: 1991089378}
-  cost: {fileID: 1118452464}
+  imageUI: {fileID: 1991089378}
+  costUI: {fileID: 1118452464}
 --- !u!1 &1318754449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,7 +2530,11 @@ MonoBehaviour:
   selectedName: 
   selectedCost: 0
   selectedSprite: {fileID: 0}
-  money: 0
+  blueprints:
+  - {fileID: 11400000, guid: 17c9ac5ef8eb9224d9e20d0a10f26d2c, type: 2}
+  - {fileID: 11400000, guid: af0ad25b5d7a29f41b430529b3a97552, type: 2}
+  - {fileID: 11400000, guid: f72b8b6e907b88b4595bb082049837ac, type: 2}
+  money: 2
 --- !u!4 &1983792814
 Transform:
   m_ObjectHideFlags: 0
@@ -2633,7 +2637,6 @@ GameObject:
   - component: {fileID: 2003313284}
   - component: {fileID: 2003313283}
   - component: {fileID: 2003313282}
-  - component: {fileID: 2003313285}
   m_Layer: 5
   m_Name: BluePrintAddButton
   m_TagString: Untagged
@@ -2705,8 +2708,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2003313285}
-        m_TargetAssemblyTypeName: Blueprint, Assembly-CSharp
+      - m_Target: {fileID: 1983792813}
+        m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: RandomizeBlueprint
         m_Mode: 1
         m_Arguments:
@@ -2755,22 +2758,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003313280}
   m_CullTransparentMesh: 1
---- !u!114 &2003313285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2003313280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b50f6a7525902488b4616b85fc3789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Blueprint
-  blueprints:
-  - {fileID: 11400000, guid: 17c9ac5ef8eb9224d9e20d0a10f26d2c, type: 2}
-  - {fileID: 11400000, guid: f72b8b6e907b88b4595bb082049837ac, type: 2}
-  - {fileID: 11400000, guid: af0ad25b5d7a29f41b430529b3a97552, type: 2}
 --- !u!1 &2030003243
 GameObject:
   m_ObjectHideFlags: 0

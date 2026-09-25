@@ -36,6 +36,8 @@ public class BuildingManager : MonoBehaviour
     public string selectedName;
     public int selectedCost;
     public Sprite selectedSprite;
+    public Blueprints[] blueprints;
+  
 
     public int money = 0;
 
@@ -56,17 +58,25 @@ public class BuildingManager : MonoBehaviour
     void Start()
     {
         inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
+        
     }
 
-    public void AddBlueprint(string itemName, Sprite sprite, int cost)
+    public void RandomizeBlueprint() 
     {
-        Debug.Log("itemName = " + itemName + "sprite = " + sprite + "cost = " + cost);
-        selectedCost = cost;
-        selectedName = itemName;
-        selectedSprite = sprite;
+        int randomNumber = Random.Range(0, blueprints.Length);
+        Blueprints randomBlueprint  = blueprints[randomNumber];
+        print(randomBlueprint);
 
-        inventory.CreateBlueprint(sprite);
+        selectedName = randomBlueprint.name;
+        selectedSprite = randomBlueprint.image;
+        selectedCost = randomBlueprint.cost;
+
+
+
+        inventory.CreateBlueprint(selectedName, selectedCost, selectedSprite);
+
     }
+
 
     public void ObjectMoving()
     {

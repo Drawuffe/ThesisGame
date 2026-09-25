@@ -9,17 +9,23 @@ public class Inventory : MonoBehaviour
     public RectTransform parentTransform;
     public RectTransform buidlingCanvas;
     public RectTransform screenParent;
-    private DragAndDrop drag;
+
     
 
 
-    public void CreateBlueprint(Sprite sprite)
+    public void CreateBlueprint(string name, int cost, Sprite sprite)
     {
-        drag = blueprintPrefab.GetComponent<DragAndDrop>();
-        print(sprite);
         GameObject newChild = Instantiate(blueprintPrefab);
         Image image = newChild.GetComponent<Image>();
         newChild.transform.SetParent(parentTransform, true);
         image.sprite = sprite;
+        Blueprint blueprintInfo = newChild.GetComponent<Blueprint>();
+        if (blueprintInfo != null)
+        {
+            blueprintInfo.StoreBlueprintInfo(name, cost, sprite);
+        }
+        
     }
+
+    
 }

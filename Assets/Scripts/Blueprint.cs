@@ -8,26 +8,27 @@ public class Blueprint : MonoBehaviour
 {
     //get a random blue print and save it as a variable for inventory to access
 
-    public Blueprints[] blueprints;
-    private string itemName;
-    private Sprite sprite;
-    private int cost;
-
-
-    private void RandomizeBlueprint() 
+   
+    public string _name;
+    public Sprite _sprite;
+    public int _cost;
+    private BlueprintInfo blueprintInfoUI;
+    
+    private void Start()
     {
-        int randomNumber = Random.Range(0, blueprints.Length);
-        Blueprints randomBlueprint  = blueprints[randomNumber];
-        print(randomBlueprint);
+        blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
+    }
 
-        itemName = randomBlueprint.itemName;
-        sprite = randomBlueprint.image;
-        cost = randomBlueprint.cost;
+    public void StoreBlueprintInfo(string itemName, int itemCost, Sprite itemSprite)
+    {
+        _name = itemName;
+        _cost = itemCost;
+        _sprite = itemSprite;
+    }
 
-        //Debug.Log("itemName =" + itemName + "sprite" + sprite + "cost" + cost);
-
-        BuildingManager.Instance.AddBlueprint(itemName,  sprite, cost);
-
+    public void AssignValues()
+    {
+        blueprintInfoUI.ChangeDisplay(_cost, _sprite);
     }
 
    

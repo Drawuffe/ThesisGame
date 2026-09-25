@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 431196413665562227}
   - component: {fileID: 8151458950860500578}
   - component: {fileID: 3885113687082529378}
+  - component: {fileID: 1998982936087249962}
   m_Layer: 5
   m_Name: BlueprintPrefab
   m_TagString: Blueprint
@@ -88,3 +89,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f81129842f3ad746aeb20c32c6c7780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragAndDrop
+--- !u!114 &1998982936087249962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745419054955544481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b50f6a7525902488b4616b85fc3789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Blueprint
+  blueprints: []
+  itemName: 
+  sprite: {fileID: 0}
+  cost: 0

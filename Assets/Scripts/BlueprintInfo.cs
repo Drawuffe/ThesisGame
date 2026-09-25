@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class BlueprintInfo : MonoBehaviour
 {
-    public Image image;
-    public TextMeshProUGUI cost;
+    public Image imageUI;
+    public TextMeshProUGUI costUI;
 
-    public void ChangeDisplay()
+    public void ChangeDisplay(int cost, Sprite sprite)
     {
-        cost.text = BuildingManager.Instance.selectedCost.ToString();
-        image.sprite = BuildingManager.Instance.selectedSprite;
+        costUI.text = cost.ToString();
+        imageUI.sprite = sprite;
     }
+
+   
 }

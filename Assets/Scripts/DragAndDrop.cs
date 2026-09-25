@@ -8,7 +8,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 {
 
     private RectTransform rectTransform;
-    private Blueprints blueprintSO;
+    public Blueprint blueprintInfo;
     private RectTransform parent; 
     private BlueprintInfo blueprintInfoUI;
     private bool canClick = false;
@@ -19,6 +19,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         rectTransform = GetComponent<RectTransform>();
         parent = GameObject.FindWithTag("Droppable").GetComponent<RectTransform>();
         blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
+        
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -58,7 +59,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
  
     public void OnPointerDown(PointerEventData eventData)
     {
-        blueprintInfoUI.ChangeDisplay();
+        blueprintInfo = GetComponent<Blueprint>();
+        blueprintInfo.AssignValues();
     }
 
     public void ChangeParent(RectTransform blueprint)

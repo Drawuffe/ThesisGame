@@ -10,27 +10,44 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     private RectTransform rectTransform;
     private Blueprints blueprintSO;
     private RectTransform parent; 
+    private BlueprintInfo blueprintInfoUI;
+    private bool canClick = false;
     //private Image image;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         parent = GameObject.FindWithTag("Droppable").GetComponent<RectTransform>();
+        blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (BuildingManager.Instance.selectedCost <= BuildingManager.Instance.money)
+        {
+            canClick = true;
+            RectTransform blueprintSelectedTrans = GetComponent<RectTransform>();
+            ChangeParent(blueprintSelectedTrans);
+        }
+        else
+        {
+            canClick = false;
+        }
         
-        
-        
-        RectTransform blueprintSelectedTrans = GetComponent<RectTransform>();
-        ChangeParent(blueprintSelectedTrans);
         
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta;
+        if (canClick)
+        {
+            rectTransform.anchoredPosition += eventData.delta;
+
+        }
+        else
+        {
+            print("can't click");
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -41,7 +58,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
  
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("item clicked");
+        blueprintInfoUI.ChangeDisplay();
     }
 
     public void ChangeParent(RectTransform blueprint)

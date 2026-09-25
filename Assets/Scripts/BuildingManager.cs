@@ -30,8 +30,28 @@ public class BuildingManager : MonoBehaviour
     
 
    //collect the random and tell the inventory what to instaniate
+    public static BuildingManager Instance {  get; private set; }
 
     private Inventory inventory;
+    public string selectedName;
+    public int selectedCost;
+    public Sprite selectedSprite;
+
+    public int money = 0;
+
+    private void Awake()
+    {
+        if(Instance != null && Instance !=this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+  
+    }
 
     void Start()
     {
@@ -41,7 +61,28 @@ public class BuildingManager : MonoBehaviour
     public void AddBlueprint(string itemName, Sprite sprite, int cost)
     {
         Debug.Log("itemName = " + itemName + "sprite = " + sprite + "cost = " + cost);
+        selectedCost = cost;
+        selectedName = itemName;
+        selectedSprite = sprite;
 
         inventory.CreateBlueprint(sprite);
+    }
+
+    public void ObjectMoving()
+    {
+        Debug.Log("Object Moving");
+    }
+
+    public void MoneyIncrease(int amount)
+    {
+        money = money + amount;
+        print(money);
+
+    }
+    public void MoneyDecrease(int amount)
+    {
+        money = money - amount;
+        print(money);
+
     }
 }

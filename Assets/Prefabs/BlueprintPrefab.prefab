@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7943480802553242833}
   - component: {fileID: 431196413665562227}
-  - component: {fileID: 75830639272968140}
   - component: {fileID: 8151458950860500578}
+  - component: {fileID: 3885113687082529378}
   m_Layer: 5
   m_Name: BlueprintPrefab
-  m_TagString: Untagged
+  m_TagString: Blueprint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,24 +46,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4745419054955544481}
   m_CullTransparentMesh: 1
---- !u!114 &75830639272968140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745419054955544481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b67fd89c9a97bc41bd427663c76bd12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Draggable
-  clickAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  pointerPosAction: {fileID: -1654692200621890270, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  panelTransform: {fileID: 7943480802553242833}
-  canvas: {fileID: 0}
-  parent: {fileID: 0}
-  uiCamera: {fileID: 0}
 --- !u!114 &8151458950860500578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,3 +76,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3885113687082529378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745419054955544481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f81129842f3ad746aeb20c32c6c7780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragAndDrop

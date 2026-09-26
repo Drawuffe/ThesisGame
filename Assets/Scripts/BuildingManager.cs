@@ -29,13 +29,17 @@ public class BuildingManager : MonoBehaviour
     //When a blueprint or tenant is dragged off of the inventory they inventory should disappear until the item is either placed or canceled
     
 
-   //collect the random and tell the inventory what to instaniate
+    //collect the random and tell the inventory what to instaniate
+
     public static BuildingManager Instance {  get; private set; }
 
     private Inventory inventory;
+    public BlueprintInfo blueprintInfo;
     public string selectedName;
     public int selectedCost;
     public Sprite selectedSprite;
+    public bool selectedCollected;
+    public bool selectedPlaced;
     public Blueprints[] blueprints;
   
 
@@ -58,6 +62,7 @@ public class BuildingManager : MonoBehaviour
     void Start()
     {
         inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
+        blueprintInfo = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
         
     }
 
@@ -70,29 +75,28 @@ public class BuildingManager : MonoBehaviour
         selectedName = randomBlueprint.name;
         selectedSprite = randomBlueprint.image;
         selectedCost = randomBlueprint.cost;
+        selectedCollected = randomBlueprint.collected;
+        selectedPlaced = randomBlueprint.placed;
 
 
 
-        inventory.CreateBlueprint(selectedName, selectedCost, selectedSprite);
+        inventory.CreateBlueprint(selectedName, selectedCost, selectedSprite, selectedCollected, selectedPlaced);
 
     }
 
-
-    public void ObjectMoving()
-    {
-        Debug.Log("Object Moving");
-    }
 
     public void MoneyIncrease(int amount)
     {
         money = money + amount;
-        print(money);
+        blueprintInfo.MoneyDisplay(money);
 
     }
     public void MoneyDecrease(int amount)
     {
+        Debug.Log(amount);
         money = money - amount;
-        print(money);
+        blueprintInfo.MoneyDisplay(money);
+
 
     }
 }

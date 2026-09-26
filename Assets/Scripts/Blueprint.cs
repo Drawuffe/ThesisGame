@@ -12,6 +12,7 @@ public class Blueprint : MonoBehaviour
     public string _name;
     public Sprite _sprite;
     public int _cost;
+    public bool _collected;
     private BlueprintInfo blueprintInfoUI;
     
     private void Start()
@@ -19,16 +20,24 @@ public class Blueprint : MonoBehaviour
         blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
     }
 
-    public void StoreBlueprintInfo(string itemName, int itemCost, Sprite itemSprite)
+    public void StoreBlueprintInfo(string itemName, int itemCost, Sprite itemSprite, bool itemCollection, bool itemPlacement)
     {
         _name = itemName;
         _cost = itemCost;
         _sprite = itemSprite;
+        _collected =  itemCollection;
+
     }
 
     public void AssignValues()
     {
         blueprintInfoUI.ChangeDisplay(_cost, _sprite);
+    }
+
+    public void Reparent()
+    {
+        Inventory inventoryVisable = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
+        this.gameObject.transform.SetParent(inventoryVisable.parentTransform, true);
     }
 
    

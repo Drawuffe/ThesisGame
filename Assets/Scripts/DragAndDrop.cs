@@ -8,10 +8,13 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 {
 
     private RectTransform rectTransform;
-    public Blueprint blueprintInfo;
+    private Blueprint blueprintInfo;
     private RectTransform parent; 
     private BlueprintInfo blueprintInfoUI;
-    private bool canClick = false;
+    public Inventory inventory;
+    public BluePrintButtons buttons;
+    public bool canClick = false;
+    public bool moving = false;
     //private Image image;
 
     private void Awake()
@@ -19,16 +22,26 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         rectTransform = GetComponent<RectTransform>();
         parent = GameObject.FindWithTag("Droppable").GetComponent<RectTransform>();
         blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
+        inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
         
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (BuildingManager.Instance.selectedCost <= BuildingManager.Instance.money)
+        if (blueprintInfo._cost <= BuildingManager.Instance.money && buttons.placed == false)
         {
+            
             canClick = true;
             RectTransform blueprintSelectedTrans = GetComponent<RectTransform>();
             ChangeParent(blueprintSelectedTrans);
+            buttons = buttons.GetComponent<BluePrintButtons>();
+            if(buttons.isActive == false)
+            {
+                buttons.ButtonVisable();
+                blueprintInfoUI.MenuNotVisable();
+                inventory.InventoryNoVisable();
+            }
+            
         }
         else
         {
@@ -42,7 +55,9 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     {
         if (canClick)
         {
+
             rectTransform.anchoredPosition += eventData.delta;
+        
 
         }
         else

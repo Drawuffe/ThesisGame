@@ -11,6 +11,7 @@ public class Blueprints : ScriptableObject
     public int cost;
     public int workersNeeded;
     public bool collected = false;
+    public bool placed = false;
 
     
 

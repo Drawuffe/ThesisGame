@@ -9,11 +9,12 @@ public class Inventory : MonoBehaviour
     public RectTransform parentTransform;
     public RectTransform buidlingCanvas;
     public RectTransform screenParent;
+    public GameObject buildInventory;
 
     
 
 
-    public void CreateBlueprint(string name, int cost, Sprite sprite)
+    public void CreateBlueprint(string name, int cost, Sprite sprite, bool collected, bool placed)
     {
         GameObject newChild = Instantiate(blueprintPrefab);
         Image image = newChild.GetComponent<Image>();
@@ -22,9 +23,20 @@ public class Inventory : MonoBehaviour
         Blueprint blueprintInfo = newChild.GetComponent<Blueprint>();
         if (blueprintInfo != null)
         {
-            blueprintInfo.StoreBlueprintInfo(name, cost, sprite);
+            collected = true;
+            blueprintInfo.StoreBlueprintInfo(name, cost, sprite, collected, placed);
         }
         
+    }
+
+    public void InventoryVisable()
+    {
+        buildInventory.SetActive(true);
+    }
+
+    public void InventoryNoVisable()
+    {
+        buildInventory.SetActive(false);
     }
 
     

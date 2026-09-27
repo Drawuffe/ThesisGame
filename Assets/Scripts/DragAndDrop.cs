@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
 {
 
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     private Blueprint blueprintInfo;
     private RectTransform parent; 
     private BlueprintInfo blueprintInfoUI;
@@ -15,6 +15,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     public BluePrintButtons buttons;
     public bool canClick = false;
     public bool moving = false;
+    
     //private Image image;
 
     private void Awake()
@@ -25,6 +26,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
         
     }
+    
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -37,9 +39,12 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
             buttons = buttons.GetComponent<BluePrintButtons>();
             if(buttons.isActive == false)
             {
+                
                 buttons.ButtonVisable();
                 blueprintInfoUI.MenuNotVisable();
                 inventory.InventoryNoVisable();
+                BuildingManager.Instance.objectSelected = GetComponent<RectTransform>();
+                BuildingManager.Instance.SelectedObjectInfo();
             }
             
         }
@@ -74,8 +79,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
  
     public void OnPointerDown(PointerEventData eventData)
     {
+
         blueprintInfo = GetComponent<Blueprint>();
         blueprintInfo.AssignValues();
+        
     }
 
     public void ChangeParent(RectTransform blueprint)
@@ -94,5 +101,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
         blueprint.position = worldPos;
     }
+
+
 
 }

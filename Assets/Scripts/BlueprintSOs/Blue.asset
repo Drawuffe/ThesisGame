@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ab9fc4af882f34cb0a8773bc224647, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
-  image: {fileID: 21300000, guid: 1b605d49f0c45aa4887239f91507a1de, type: 3}
+  image: {fileID: 21300000, guid: bf549308d9cff7844aa66d00e741e608, type: 3}
   itemName: Blue
   cost: 4
   workersNeeded: 2
   collected: 0
+  placed: 0

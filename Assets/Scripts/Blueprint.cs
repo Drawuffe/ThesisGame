@@ -38,6 +38,8 @@ public class Blueprint : MonoBehaviour
     {
         Inventory inventoryVisable = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
         this.gameObject.transform.SetParent(inventoryVisable.parentTransform, true);
+        this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
     }
 
    

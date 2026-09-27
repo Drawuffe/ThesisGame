@@ -2758,6 +2758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137e66d1aab0f7144a85990227528b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingManager
+  blueprintInfo: {fileID: 0}
   selectedName: 
   selectedCost: 0
   selectedSprite: {fileID: 0}
@@ -2767,6 +2768,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 17c9ac5ef8eb9224d9e20d0a10f26d2c, type: 2}
   - {fileID: 11400000, guid: af0ad25b5d7a29f41b430529b3a97552, type: 2}
   - {fileID: 11400000, guid: f72b8b6e907b88b4595bb082049837ac, type: 2}
+  objectSelected: {fileID: 0}
+  rotateScript: {fileID: 2074540503}
   money: 0
 --- !u!4 &1983792814
 Transform:
@@ -3135,6 +3138,7 @@ GameObject:
   - component: {fileID: 2074540500}
   - component: {fileID: 2074540502}
   - component: {fileID: 2074540501}
+  - component: {fileID: 2074540503}
   m_Layer: 5
   m_Name: DroppableArea
   m_TagString: Droppable
@@ -3199,6 +3203,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074540499}
   m_CullTransparentMesh: 1
+--- !u!114 &2074540503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074540499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba43f686515068b458817733fac8c932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateScript
+  clicks: 0
+  blueprintInfoUI: {fileID: 0}
+  rectTransform: {fileID: 0}
+  buttons: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!1 &2131331288
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,6 +3298,8 @@ MonoBehaviour:
   buidlingCanvas: {fileID: 510490762}
   screenParent: {fileID: 2074540500}
   buildInventory: {fileID: 451069963}
+  buttons: {fileID: 0}
+  newChild: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

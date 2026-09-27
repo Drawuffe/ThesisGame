@@ -10,13 +10,17 @@ public class BluePrintButtons : MonoBehaviour
     public bool clicking = false;
     public BlueprintInfo blueprintInfoVisabiliy;
     public Inventory inventoryVisable;
+    public float rotationSpeed = 360f;
+    public bool rotating;
+    private RotateScript rotateScript;
+    public Transform rectTransform;
+
 
     private void Start()
     {
-
         this.gameObject.SetActive(false);
+        rotateScript = GameObject.FindWithTag("Droppable").GetComponent<RotateScript>();
 
-        
     }
 
     public void ButtonVisable()
@@ -41,13 +45,23 @@ public class BluePrintButtons : MonoBehaviour
     
     public void RotateBlueprint()
     {
-        isActive = true;
-        ButtonVisable();
+        if (rotating == false)
+        {
+            rectTransform = GetComponentInParent<Transform>();
+            isActive = true;
+            rotating = true;
+            ButtonVisable();
+            rotateScript.clicks = 1;
+        }
+        else
+        {
+            isActive = false;
+            rotating = false;
+            ButtonVisable();
+            rotateScript.clicks = 0;
+        }
+        
 
-
-        isActive = false;
-        ButtonVisable();
-        //when button is clicked the bluprint will rotate with the mouse
     }
 
     public void PlaceBlueprint()

@@ -41,6 +41,8 @@ public class BuildingManager : MonoBehaviour
     public bool selectedCollected;
     public bool selectedPlaced;
     public Blueprints[] blueprints;
+    public RectTransform objectSelected;
+    public RotateScript rotateScript;
   
 
     public int money = 0;
@@ -63,6 +65,7 @@ public class BuildingManager : MonoBehaviour
     {
         inventory = GameObject.Find("BluePrint_Content").GetComponent<Inventory>();
         blueprintInfo = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
+        rotateScript = GameObject.FindWithTag("Droppable").GetComponent<RotateScript>();
         
     }
 
@@ -77,6 +80,7 @@ public class BuildingManager : MonoBehaviour
         selectedCost = randomBlueprint.cost;
         selectedCollected = randomBlueprint.collected;
         selectedPlaced = randomBlueprint.placed;
+        
 
 
 
@@ -97,6 +101,12 @@ public class BuildingManager : MonoBehaviour
         money = money - amount;
         blueprintInfo.MoneyDisplay(money);
 
+
+    }
+    public void SelectedObjectInfo()
+    {
+        rotateScript.rectTransform = objectSelected;
+        rotateScript.buttons = objectSelected.GetComponentInChildren<BluePrintButtons>();
 
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2421663515834387162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.4019165, y: 35.964355, z: -1.80746}
+  m_LocalPosition: {x: 12.34, y: 35.5, z: -1.80746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56,6 +56,7 @@ MonoBehaviour:
   inventoryVisable: {fileID: 0}
   rotationSpeed: 250
   rotating: 0
+  rectTransform: {fileID: 0}
 --- !u!1 &3286592254062268070
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +359,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &431196413665562227
 CanvasRenderer:
@@ -410,11 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f81129842f3ad746aeb20c32c6c7780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragAndDrop
+  rectTransform: {fileID: 0}
   inventory: {fileID: 0}
   buttons: {fileID: 7502468747635905337}
   canClick: 0
   moving: 0
-  clicks: 0
 --- !u!114 &1998982936087249962
 MonoBehaviour:
   m_ObjectHideFlags: 0

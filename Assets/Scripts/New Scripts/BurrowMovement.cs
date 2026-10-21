@@ -10,16 +10,15 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public bool moving = false;
     public RectTransform rectTransform;
     private BlueprintInfo blueprintInfoUI;
-    private Blueprint blueprintInfo;
-    private RectTransform parent; 
+    private bool pieceSpawned = false;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        blueprintInfoUI = GameObject.FindWithTag("BlueprintMenu").GetComponent<BlueprintInfo>();
 
-        parent = GameObject.FindWithTag("Droppable").GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -27,7 +26,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
 
         
-    
+        moving = true;
         
         
     }
@@ -50,22 +49,24 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("item dropped");
+        moving = false;
     }
 
  
     public void OnPointerDown(PointerEventData eventData)
     {
 
-
-        if(CompareTag == "Corner")
+        //Checks if the gameobject being clicked is a corner or another piece
+        if(gameObject.tag == "Corner") //0
         {
-            if(Instance.GameManager.cornerPieces > 0)
+            if(GameManager.Instance.cornerPieces > 0)
             {
                 canClick = true;
-                Debug.Log("can click");
-                Instance.GameManager.cornerPieces -= 1;
-                blueprintInfo = GetComponent<Blueprint>();
-                blueprintInfo.AssignValues();
+                Debug.Log("can click, instantiate corner piece");
+                GameManager.Instance.cornerPieces -= 1;
+                GameManager.Instance.pieceClicked = 0;
+                pieceSpawned = true;
+                
 
             }
             else
@@ -74,28 +75,24 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 Debug.Log("can't click");
             }
         }
+
+        if (pieceSpawned == true)
+        {
+
+            pieceSpawned = false;
+            GameManager.Instance.parentTransform = rectTransform;
+            GameManager.Instance.BurrowPieceFound();
+        }
+        else
+        {
+            Debug.Log("No piece spawned");
+        }
         
         
     }
 
-    public void ChangeParent(RectTransform blueprint)
-    {
-        Vector3 worldPos = blueprint.position;
-        Vector2 worldSize = blueprint.rect.size;
-        Vector3 worldScale = blueprint.lossyScale;
-        
+    
 
-        blueprint.SetParent(parent, worldPositionStays: true);
-
-        Vector2 newSize = new Vector2(worldSize.x / worldScale.x, worldSize.y / worldScale.y);
-
-        blueprint.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize.x);
-        blueprint.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize.x);
-
-        blueprint.position = worldPos;
-    }
-
-
-
+  
 
 }

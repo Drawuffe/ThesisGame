@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa745e07fe7b5e440a46b071022bb522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  drag: {fileID: 3885113687082529378}
+  drag: {fileID: 0}
   isActive: 0
   placed: 0
   clicking: 0

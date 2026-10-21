@@ -364,6 +364,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34126646}
   m_CullTransparentMesh: 1
+--- !u!1 &34971483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34971485}
+  - component: {fileID: 34971484}
+  m_Layer: 0
+  m_Name: BurrowManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &34971484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34971483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b05fd361e86f40008e6911c192f5c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  cornerPieces: 3
+  straightPieces: 6
+  threePieces: 4
+  fourPieces: 1
+  blueprints:
+  - {fileID: 11400000, guid: 17c9ac5ef8eb9224d9e20d0a10f26d2c, type: 2}
+  - {fileID: 11400000, guid: f72b8b6e907b88b4595bb082049837ac, type: 2}
+  - {fileID: 11400000, guid: af0ad25b5d7a29f41b430529b3a97552, type: 2}
+  - {fileID: 11400000, guid: 1edc52a09295c4953bba1e86d2846090, type: 2}
+  pieceClicked: 0
+  burrowPrefab: {fileID: 887355285255234755, guid: 06234d73bc5471d4d8a51f98e7814e99, type: 3}
+  parentTransform: {fileID: 1085939618}
+  newChild: {fileID: 0}
+--- !u!4 &34971485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34971483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 550.21954, y: 310.34204, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &54608722
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +627,7 @@ GameObject:
   - component: {fileID: 275217298}
   - component: {fileID: 275217300}
   - component: {fileID: 275217299}
+  - component: {fileID: 275217301}
   m_Layer: 5
   m_Name: ThreeSelection
   m_TagString: Three
@@ -635,6 +693,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275217297}
   m_CullTransparentMesh: 1
+--- !u!114 &275217301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275217297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e21bb736294151b80e3062ae85ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BurrowMovement
+  canClick: 0
+  moving: 1
+  rectTransform: {fileID: 275217298}
 --- !u!1 &343054661
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +965,7 @@ GameObject:
   - component: {fileID: 424242260}
   - component: {fileID: 424242262}
   - component: {fileID: 424242261}
+  - component: {fileID: 424242263}
   m_Layer: 5
   m_Name: FourSelection
   m_TagString: Four
@@ -957,6 +1031,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424242259}
   m_CullTransparentMesh: 1
+--- !u!114 &424242263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424242259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e21bb736294151b80e3062ae85ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BurrowMovement
+  canClick: 0
+  moving: 0
+  rectTransform: {fileID: 424242260}
 --- !u!1 &426084298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,6 +2616,7 @@ GameObject:
   - component: {fileID: 1476516825}
   - component: {fileID: 1476516827}
   - component: {fileID: 1476516826}
+  - component: {fileID: 1476516828}
   m_Layer: 5
   m_Name: StraightSelection
   m_TagString: Straight
@@ -2592,6 +2682,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476516824}
   m_CullTransparentMesh: 1
+--- !u!114 &1476516828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476516824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e21bb736294151b80e3062ae85ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BurrowMovement
+  canClick: 0
+  moving: 0
+  rectTransform: {fileID: 1476516825}
 --- !u!1 &1583332773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,3 +3795,4 @@ SceneRoots:
   - {fileID: 2032464952}
   - {fileID: 1774268300}
   - {fileID: 383946545}
+  - {fileID: 34971485}

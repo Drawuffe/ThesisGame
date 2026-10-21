@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96ab9fc4af882f34cb0a8773bc224647, type: 3}
-  m_Name: Yellow
+  m_Name: Four
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
   image: {fileID: 21300000, guid: 1bbe9d7fbe11e9b4991531d8602aa464, type: 3}
   itemName: Yellow

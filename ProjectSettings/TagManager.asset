@@ -8,6 +8,10 @@ TagManager:
   - Blueprint
   - BlueprintMenu
   - Ground
+  - Corner
+  - Straight
+  - Three
+  - Four
   layers:
   - Default
   - TransparentFX

@@ -571,8 +571,8 @@ GameObject:
   - component: {fileID: 275217300}
   - component: {fileID: 275217299}
   m_Layer: 5
-  m_Name: TestItem_2
-  m_TagString: Blueprint
+  m_Name: ThreeSelection
+  m_TagString: Three
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,8 +893,8 @@ GameObject:
   - component: {fileID: 424242262}
   - component: {fileID: 424242261}
   m_Layer: 5
-  m_Name: TestItem_4
-  m_TagString: Blueprint
+  m_Name: FourSelection
+  m_TagString: Four
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2315,8 +2315,8 @@ GameObject:
   - component: {fileID: 1412972087}
   - component: {fileID: 1412972086}
   m_Layer: 5
-  m_Name: TestItem_1
-  m_TagString: Blueprint
+  m_Name: CornerSelection
+  m_TagString: Corner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2528,8 +2528,8 @@ GameObject:
   - component: {fileID: 1476516827}
   - component: {fileID: 1476516826}
   m_Layer: 5
-  m_Name: TestItem_3
-  m_TagString: Blueprint
+  m_Name: StraightSelection
+  m_TagString: Straight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

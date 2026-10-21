@@ -8,10 +8,10 @@ public class Blueprints : ScriptableObject
 
     public Sprite image;
     public string itemName;
-    public int cost;
-    public int workersNeeded;
-    public bool collected = false;
-    public bool placed = false;
+    //public int cost;
+    //public int workersNeeded;
+    //public bool collected = false;
+    //public bool placed = false;
 
     
 

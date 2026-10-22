@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ab9fc4af882f34cb0a8773bc224647, type: 3}
   m_Name: Four
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
-  image: {fileID: -1980469184, guid: d819c46774e2656469c9aefd06c1b1fb, type: 3}
+  image: {fileID: -1374512094, guid: c184bab59bf48cc4e8f828bc937e1cf5, type: 3}
   itemName: Yellow

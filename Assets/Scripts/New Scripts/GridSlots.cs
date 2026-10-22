@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler, IPointerDownHandler
 {
 
     public Image highlightOverlay;
@@ -30,6 +30,15 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(transform.childCount == 1)
+        {
+            highlightOverlay.gameObject.SetActive(true);
+            highlightOverlay.color = validColor;
+        }
+        else
+        {
+            highlightOverlay.gameObject.SetActive(false);
+        }
         // Check if the user is currently dragging an item
         if (eventData.pointerDrag != null)
         {
@@ -48,6 +57,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 if(transform.childCount == 2)
                 {
                     highlightOverlay.gameObject.SetActive(false);
+                    highlightOverlay.color = validColor;
     
                 }
                 else
@@ -62,7 +72,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         
     public void OnDrop(PointerEventData eventData)
     {
-
+        
         if(transform.childCount == 1)
         {
             GameObject dropped = eventData.pointerDrag;
@@ -72,6 +82,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (highlightOverlay != null)
         {
             highlightOverlay.gameObject.SetActive(false);
+            highlightOverlay.color = validColor;
         }
 
         
@@ -82,7 +93,25 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (highlightOverlay != null)
         {
             highlightOverlay.gameObject.SetActive(false);
+            highlightOverlay.color = validColor;
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        
+        GameManager.Instance.instantiateParent = transform;
+        if(transform.childCount == 1)
+        {
+            GameManager.Instance.pieceButtons.SetActive(true);
+            GameManager.Instance.pieceButtons.transform.position = transform.position;
+
+        }
+        else
+        {
+            GameManager.Instance.pieceButtons.SetActive(false);
+        }
+
     }
   
 

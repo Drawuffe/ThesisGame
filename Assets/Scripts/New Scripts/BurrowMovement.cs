@@ -3,18 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
-public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
+public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
 
     public bool canClick = false;
     public bool moving = false;
     public RectTransform rectTransform;
-    private BlueprintInfo blueprintInfoUI;
     public Transform parentTransform;
     public Image image;
     bool isRotating = false;
     float duration = 0.3f;
     private Color originalColor;
+    private int selectedIndex;
+    
 
 
 
@@ -32,7 +33,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public void OnBeginDrag(PointerEventData eventData)
     {
 
-        
+        GameManager.Instance.pieceButtons.SetActive(false); 
         moving = true;
         parentTransform = transform.parent;
         image.raycastTarget = false;
@@ -82,16 +83,63 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     }
 
  
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
+        GameManager.Instance.pieceButtons.SetActive(false);
+
 
         if(!moving)
         {
             TriggerRotation();
         }
-        
-        
-        
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            
+            BurrowInfo pieceInfo = GetComponent<BurrowInfo>();
+            if(pieceInfo.burrowName == "Corner")
+            {
+                GameManager.Instance.cornerPieces += 1;
+                ClearBurrowColliders(transform);
+                Destroy(this.gameObject); 
+                GameManager.Instance.UpdateBurrowButton();
+                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+               
+
+            }
+            if(pieceInfo.burrowName == "Straight")
+            {
+                GameManager.Instance.straightPieces += 1;
+                ClearBurrowColliders(transform);
+                Destroy(this.gameObject); 
+                GameManager.Instance.UpdateBurrowButton();
+                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+
+                
+            }
+            if(pieceInfo.burrowName == "Three")
+            {
+                GameManager.Instance.threePieces += 1;
+                ClearBurrowColliders(transform);
+                Destroy(this.gameObject); 
+                GameManager.Instance.UpdateBurrowButton();
+                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+                
+                
+            }
+            if(pieceInfo.burrowName == "Four")
+            {
+                GameManager.Instance.fourPieces += 1;
+                ClearBurrowColliders(transform);
+                Destroy(this.gameObject); 
+                GameManager.Instance.UpdateBurrowButton();
+                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+                
+   
+                
+            }
+        }
+
         
     }
 
@@ -123,6 +171,16 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         // Ensure it snaps perfectly to the final target angle
         transform.rotation = targetRotation; 
         isRotating = false;
+    }
+
+    public void ClearBurrowColliders(Transform currentTransform)
+    {
+
+        for (int i = currentTransform.childCount - 1; i >= 0; i--)
+        {
+            GameManager.Instance.allColliders.Remove(currentTransform.GetChild(i).gameObject);
+            Destroy(currentTransform.GetChild(i).gameObject);
+        }
     }
 
     

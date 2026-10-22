@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public int straightPieces = 0;
     public int threePieces = 0;
     public int fourPieces = 0;
+    public TextMeshProUGUI cornerText, straightText, threeText, fourText;
+    private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
     public Blueprints[] blueprints;
     public int pieceClicked = 0;
     private string selectedName;
@@ -22,7 +24,11 @@ public class GameManager : MonoBehaviour
     public GameObject newChild;
     private Vector3 worldPosition;
     private GameObject currentInstance;
-    public Transform tempParent;
+    public Transform instantiateParent;
+    public GameObject pieceButtons;
+    public List<GameObject> addedBurrowList = new List<GameObject>();
+    public List<GameObject> burrowColliders = new List<GameObject>();
+    public List<GameObject> allColliders =  new List<GameObject>();
 
 
 
@@ -38,10 +44,36 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        UpdateBurrowButton();
+
+        startCornerPieces = cornerPieces;
+        startStraightPieces = straightPieces;
+        startThreePieces = threePieces;
+        startFourPieces = fourPieces;
   
     }
+    void Start()
+    {
+        pieceButtons.SetActive(false);
+    }
 
-  
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (GameObject obj in addedBurrowList)
+{
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+}
+            addedBurrowList.Clear();
+            cornerPieces = startCornerPieces;
+            Reset();
+        }
+    }
 
     public void BurrowPieceFound(int piece)
     {
@@ -51,6 +83,7 @@ public class GameManager : MonoBehaviour
             if(cornerPieces > 0)
             {
                 cornerPieces -= 1;
+                cornerText.text = cornerPieces.ToString();
                 PieceFound();
 
             }
@@ -62,6 +95,7 @@ public class GameManager : MonoBehaviour
             {
                 straightPieces -= 1;
                 PieceFound();
+                straightText.text = straightPieces.ToString();
 
             }
   
@@ -72,6 +106,7 @@ public class GameManager : MonoBehaviour
             {
                 threePieces -= 1;
                 PieceFound();
+                threeText.text = threePieces.ToString();
 
             }
         }
@@ -81,6 +116,7 @@ public class GameManager : MonoBehaviour
             {
                 fourPieces -= 1;
                 PieceFound();
+                fourText.text = fourPieces.ToString();
 
             }
         }
@@ -98,22 +134,87 @@ public class GameManager : MonoBehaviour
 
         selectedName = selectedBurrow.name;
         selectedSprite = selectedBurrow.image;
-        StartPlacing(selectedSprite);
+        StartPlacing(selectedName, selectedSprite);
     }
 
 
-    public void StartPlacing(Sprite burrowImage)
+    public void StartPlacing(string burrowName, Sprite burrowImage)
     {
-        if (currentInstance != null) return;
-
-        // Instantiate the prefab
-        currentInstance = Instantiate(burrowPrefab,parentTransform);
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f; 
-        currentInstance.transform.position = mousePos;
-
+ 
+        currentInstance = Instantiate(burrowPrefab,instantiateParent);
+        addedBurrowList.Add(currentInstance);
+        int index = addedBurrowList.IndexOf(currentInstance);
         Image image = currentInstance.GetComponent<Image>();
         image.sprite = burrowImage;
+    
+        if(burrowName == "Corner")
+        {
+            Transform childTransform = currentInstance.transform.GetChild(1); 
+            Destroy(childTransform.gameObject);
+            
+            childTransform = currentInstance.transform.GetChild(2);
+            Destroy(childTransform.gameObject);
+            
+        }
+        if(burrowName == "Straight")
+        {
+            Transform childTransform = currentInstance.transform.GetChild(0); 
+            Destroy(childTransform.gameObject);
+            childTransform= currentInstance.transform.GetChild(2);
+            Destroy(childTransform.gameObject);
+            
+        }
+        if(burrowName == "Three")
+        {
+            Transform childTransform = currentInstance.transform.GetChild(0); 
+            Destroy(childTransform.gameObject);
+            
+        }
+        
+        if (currentInstance != null)
+        {
+            // Loop through only the direct children of the parent transform
+            foreach (Transform childTransform in currentInstance.transform)
+            {
+                burrowColliders.Add(childTransform.gameObject);
+            }
+        }
+        BurrowInfo burrowInfo = currentInstance.GetComponent<BurrowInfo>();
+        burrowInfo.AssignColliders(burrowColliders);
+        burrowInfo.StoreInfo(burrowName, burrowImage, index);
+        pieceButtons.SetActive(false);
+        allColliders.AddRange(burrowColliders);
+        burrowColliders.Clear();
+        CleanList(allColliders);
 
+    }
+
+    public void UpdateBurrowButton()
+    {
+        cornerText.text = cornerPieces.ToString();
+        straightText.text = straightPieces.ToString();
+        threeText.text = threePieces.ToString();
+        fourText.text = fourPieces.ToString();
+    }
+
+    public void Reset()
+    {
+        cornerPieces = startCornerPieces;
+        straightPieces = startStraightPieces;
+        threePieces = startThreePieces;
+        fourPieces = startFourPieces;
+        UpdateBurrowButton();
+        allColliders.Clear();
+    }
+
+    public void CleanList(List<GameObject> list)
+    {
+        for (int i = list.Count - 1; i >= 0; i--)
+{
+        if (list[i] == null)
+        {
+            list.RemoveAt(i); // Safe to remove when counting backwards
+        }
+}
     }
 }

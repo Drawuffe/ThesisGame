@@ -10,7 +10,12 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public bool moving = false;
     public RectTransform rectTransform;
     private BlueprintInfo blueprintInfoUI;
-    private bool pieceSpawned = false;
+    public Transform parentTransform;
+    public Image image;
+    bool isRotating = false;
+    float duration = 0.3f;
+    private Color originalColor;
+
 
 
 
@@ -18,6 +23,8 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        originalColor = image.color;
+        
 
     }
 
@@ -27,16 +34,35 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
         
         moving = true;
-        
+        parentTransform = transform.parent;
+        image.raycastTarget = false;
+        image.color = Color.yellow;
+
+        if(transform.parent.name is "Screen" )
+        {
+            
+            parentTransform = transform.parent;
+        }
+        else
+        {
+            rectTransform.SetParent(rectTransform.root);
+            rectTransform.SetAsLastSibling();
+        }
+
+
         
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+
+        
+        rectTransform.anchoredPosition += eventData.delta;
+
         if (canClick)
         {
 
-            rectTransform.anchoredPosition += eventData.delta;
+            
         
 
         }
@@ -50,45 +76,53 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         Debug.Log("item dropped");
         moving = false;
+        transform.SetParent(parentTransform);
+        image.raycastTarget = true;
+        image.color= originalColor;
     }
 
  
     public void OnPointerDown(PointerEventData eventData)
     {
 
-        //Checks if the gameobject being clicked is a corner or another piece
-        if(gameObject.tag == "Corner") //0
+        if(!moving)
         {
-            if(GameManager.Instance.cornerPieces > 0)
-            {
-                canClick = true;
-                Debug.Log("can click, instantiate corner piece");
-                GameManager.Instance.cornerPieces -= 1;
-                GameManager.Instance.pieceClicked = 0;
-                pieceSpawned = true;
-                
-
-            }
-            else
-            {
-                canClick = false;
-                Debug.Log("can't click");
-            }
-        }
-
-        if (pieceSpawned == true)
-        {
-
-            pieceSpawned = false;
-            GameManager.Instance.parentTransform = rectTransform;
-            GameManager.Instance.BurrowPieceFound();
-        }
-        else
-        {
-            Debug.Log("No piece spawned");
+            TriggerRotation();
         }
         
         
+        
+        
+    }
+
+    public void TriggerRotation()
+    {
+
+        if (!isRotating)
+        {
+            StartCoroutine(RotateRoutine(-90f));
+        }
+    }
+
+    private IEnumerator RotateRoutine(float angle)
+    {
+        isRotating = true;
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0, 0, angle);
+        float timePassed = 0f;
+
+        while (timePassed < duration)
+        {
+            timePassed += Time.deltaTime;
+            // Smoothly lerp the rotation over time
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timePassed / duration);
+            yield return null;
+        }
+
+        // Ensure it snaps perfectly to the final target angle
+        transform.rotation = targetRotation; 
+        isRotating = false;
     }
 
     

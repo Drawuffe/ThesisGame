@@ -18,8 +18,11 @@ public class GameManager : MonoBehaviour
     private string selectedName;
     private Sprite selectedSprite;
     public GameObject burrowPrefab;
-    public RectTransform parentTransform;
+    public Transform parentTransform;
     public GameObject newChild;
+    private Vector3 worldPosition;
+    private GameObject currentInstance;
+    public Transform tempParent;
 
 
 
@@ -38,26 +41,79 @@ public class GameManager : MonoBehaviour
   
     }
 
-    public void BurrowPieceFound()
+  
+
+    public void BurrowPieceFound(int piece)
     {
-        Blueprints selectedBurrow = GameManager.Instance.blueprints[pieceClicked];
+        pieceClicked = piece;
+        if(piece is 0)
+        {
+            if(cornerPieces > 0)
+            {
+                cornerPieces -= 1;
+                PieceFound();
+
+            }
+   
+        }
+        if(piece is 1)
+        {
+            if(straightPieces > 0)
+            {
+                straightPieces -= 1;
+                PieceFound();
+
+            }
+  
+        }
+        if(piece is 2)
+        {
+            if(threePieces > 0)
+            {
+                threePieces -= 1;
+                PieceFound();
+
+            }
+        }
+        if(piece is 3)
+        {
+            if(fourPieces > 0)
+            {
+                fourPieces -= 1;
+                PieceFound();
+
+            }
+        }
+        else
+        {
+            Debug.Log("no piece");
+        }
+
+    }
+
+    private void PieceFound()
+    {
+        Blueprints selectedBurrow = blueprints[pieceClicked];
         print(selectedBurrow);
 
         selectedName = selectedBurrow.name;
         selectedSprite = selectedBurrow.image;
-        GameManager.Instance.SpawnPiece(selectedName, selectedSprite);
+        StartPlacing(selectedSprite);
     }
 
-    public void SpawnPiece(string burrowName, Sprite burrowImage)
-    {
-        
-        Debug.Log(burrowName);
-        newChild = Instantiate(burrowPrefab);
-        Image image = newChild.GetComponent<Image>();
-        newChild.transform.SetParent(parentTransform, true);
-        image.sprite = burrowImage;
-        Debug.Log("Piece Spawned");
 
-    
+    public void StartPlacing(Sprite burrowImage)
+    {
+        if (currentInstance != null) return;
+
+        // Instantiate the prefab
+        currentInstance = Instantiate(burrowPrefab,parentTransform);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f; 
+        currentInstance.transform.position = mousePos;
+
+        Image image = currentInstance.GetComponent<Image>();
+        image.sprite = burrowImage;
+
     }
 }

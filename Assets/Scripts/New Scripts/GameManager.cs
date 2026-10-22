@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
                 cornerPieces -= 1;
                 cornerText.text = cornerPieces.ToString();
                 PieceFound();
+                
 
             }
    
@@ -186,6 +187,8 @@ public class GameManager : MonoBehaviour
         allColliders.AddRange(burrowColliders);
         burrowColliders.Clear();
         CleanList(allColliders);
+        AudioController audioController =currentInstance.GetComponent<AudioController>();
+        audioController.PlayAudio(1);
 
     }
 

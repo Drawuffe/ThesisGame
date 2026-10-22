@@ -15,6 +15,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     float duration = 0.3f;
     private Color originalColor;
     private int selectedIndex;
+    private AudioController audioController;
     
 
 
@@ -25,6 +26,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         rectTransform = GetComponent<RectTransform>();
         originalColor = image.color;
+        audioController = GetComponent<AudioController>();
         
 
     }
@@ -80,6 +82,8 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         transform.SetParent(parentTransform);
         image.raycastTarget = true;
         image.color= originalColor;
+        AudioController audioController = GetComponent<AudioController>();
+        audioController.PlayAudio(2);
     }
 
  
@@ -104,7 +108,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 Destroy(this.gameObject); 
                 GameManager.Instance.UpdateBurrowButton();
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
-               
+
 
             }
             if(pieceInfo.burrowName == "Straight")
@@ -126,6 +130,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
                 
                 
+                
             }
             if(pieceInfo.burrowName == "Four")
             {
@@ -135,7 +140,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 GameManager.Instance.UpdateBurrowButton();
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
                 
-   
+    
                 
             }
         }
@@ -149,6 +154,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         if (!isRotating)
         {
             StartCoroutine(RotateRoutine(-90f));
+            audioController.PlayAudio(3);
         }
     }
 

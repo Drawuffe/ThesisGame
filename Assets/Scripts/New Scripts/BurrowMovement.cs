@@ -15,7 +15,6 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     float duration = 0.3f;
     private Color originalColor;
     private int selectedIndex;
-    private AudioController audioController;
     
 
 
@@ -26,7 +25,6 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         rectTransform = GetComponent<RectTransform>();
         originalColor = image.color;
-        audioController = GetComponent<AudioController>();
         
 
     }
@@ -82,8 +80,8 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         transform.SetParent(parentTransform);
         image.raycastTarget = true;
         image.color= originalColor;
-        AudioController audioController = GetComponent<AudioController>();
-        audioController.PlayAudio(2);
+        GameManager.Instance.audioController.PlayAudio(2);
+        GameManager.Instance.CheckForCompletion();
     }
 
  
@@ -105,9 +103,10 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             {
                 GameManager.Instance.cornerPieces += 1;
                 ClearBurrowColliders(transform);
-                Destroy(this.gameObject); 
                 GameManager.Instance.UpdateBurrowButton();
+                Debug.Log(pieceInfo.burrowIndex);
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+                Destroy(this.gameObject); 
 
 
             }
@@ -154,7 +153,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         if (!isRotating)
         {
             StartCoroutine(RotateRoutine(-90f));
-            audioController.PlayAudio(3);
+            GameManager.Instance.audioController.PlayAudio(3);
         }
     }
 
@@ -177,6 +176,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         // Ensure it snaps perfectly to the final target angle
         transform.rotation = targetRotation; 
         isRotating = false;
+        GameManager.Instance.CheckForCompletion();
     }
 
     public void ClearBurrowColliders(Transform currentTransform)

@@ -2,27 +2,33 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioSource audioSource_01;
-    public AudioSource audioSource_02;
-    public AudioSource audioSource_03;
+    public AudioSource move_Sound;
+    public AudioSource place_Sound;
+    public AudioSource Rotate_Sound;
+    public AudioSource Competion_Sound;
 
 
     public void PlayAudio(int audioNumber)
     {
         if(audioNumber == 1)
         {
-            audioSource_01.Play();
+            move_Sound.Play();
             Debug.Log("audio played");
             
         }
         if(audioNumber == 2)
         {
-            audioSource_02.Play();
+            place_Sound.Play();
             
         }
         if(audioNumber == 3)
         {
-            audioSource_03.Play();
+            Rotate_Sound.Play();
+            
+        }
+        if(audioNumber == 4)
+        {
+            Competion_Sound.Play();
             
         }
     }

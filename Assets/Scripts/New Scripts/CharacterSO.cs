@@ -4,7 +4,9 @@ using UnityEngine;
 public class CharacterSO : ScriptableObject
 {
     public string characterName;
-    public string wantInfo;
+    public string wantInfo_1;
+    public string wantInfo_2;
+    public string wantInfo_3;
     public Sprite characterSprite;
     public int points;
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class GameManager : MonoBehaviour
@@ -29,7 +30,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> addedBurrowList = new List<GameObject>();
     public List<GameObject> burrowColliders = new List<GameObject>();
     public List<GameObject> allColliders =  new List<GameObject>();
-
+    public List<GameObject> burrowHoles =  new List<GameObject>();
+    public Image completionImage;
+    public AudioController audioController;
+    
 
 
 
@@ -51,11 +55,16 @@ public class GameManager : MonoBehaviour
         startStraightPieces = straightPieces;
         startThreePieces = threePieces;
         startFourPieces = fourPieces;
+        
+        
   
     }
     void Start()
     {
         pieceButtons.SetActive(false);
+        completionImage.enabled = false;
+        AudioController audioController = GetComponent<AudioController>();
+        BurrowAdd();
     }
 
     void Update()
@@ -73,6 +82,8 @@ public class GameManager : MonoBehaviour
             cornerPieces = startCornerPieces;
             Reset();
         }
+
+    
     }
 
     public void BurrowPieceFound(int piece)
@@ -174,7 +185,6 @@ public class GameManager : MonoBehaviour
         
         if (currentInstance != null)
         {
-            // Loop through only the direct children of the parent transform
             foreach (Transform childTransform in currentInstance.transform)
             {
                 burrowColliders.Add(childTransform.gameObject);
@@ -187,8 +197,8 @@ public class GameManager : MonoBehaviour
         allColliders.AddRange(burrowColliders);
         burrowColliders.Clear();
         CleanList(allColliders);
-        AudioController audioController =currentInstance.GetComponent<AudioController>();
         audioController.PlayAudio(1);
+        CheckForCompletion();
 
     }
 
@@ -208,6 +218,7 @@ public class GameManager : MonoBehaviour
         fourPieces = startFourPieces;
         UpdateBurrowButton();
         allColliders.Clear();
+        BurrowAdd();
     }
 
     public void CleanList(List<GameObject> list)
@@ -216,8 +227,67 @@ public class GameManager : MonoBehaviour
 {
         if (list[i] == null)
         {
-            list.RemoveAt(i); // Safe to remove when counting backwards
+            list.RemoveAt(i); 
         }
 }
     }
+
+    public void CheckForCompletion()
+    {
+        if(AreAllConditionsMet() == true)
+        {
+            Debug.Log("complete");
+            WhenComplete();
+        }
+        else
+        {
+            Debug.Log("not complete");
+            completionImage.enabled = false;
+        }
+    }
+
+    public bool AreAllConditionsMet()
+    {
+        foreach (GameObject go in allColliders)
+        {
+            if (go == null) continue; 
+
+  
+            if (go.TryGetComponent<TunnelCollision>(out var script))
+            {
+
+                if (!script.colliding)
+                {
+                    return false; 
+                    
+                }
+            }
+            else
+            {
+
+                return false; 
+            }
+        }
+
+        return true; 
+    }
+
+    private void WhenComplete()
+    {
+
+        completionImage.enabled = true;
+        audioController.PlayAudio(4);
+    }
+
+    private void BurrowAdd()
+    {
+        foreach(GameObject go in burrowHoles)
+        {
+            allColliders.Add(go);
+        }
+    }
+
+    
+
+    
 }

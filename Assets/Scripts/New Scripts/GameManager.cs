@@ -9,13 +9,15 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {  get; private set; }
-
+    [Header("Piece Total for Level")]
     public int cornerPieces = 0;
     public int straightPieces = 0;
     public int threePieces = 0;
     public int fourPieces = 0;
+    [Header("Button Text for Piece Menu")]
     public TextMeshProUGUI cornerText, straightText, threeText, fourText;
     private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
+    [Header("List of Possible Pieces")]
     public Blueprints[] blueprints;
     public int pieceClicked = 0;
     private string selectedName;
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void BurrowPieceFound(int piece)
     {
+        //determines what piece the player wants to spawn and finds the piece info in the scriptable object.
         pieceClicked = piece;
         if(piece is 0)
         {
@@ -141,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     private void PieceFound()
     {
+        //finds the piece in the list of objects
         Blueprints selectedBurrow = blueprints[pieceClicked];
         print(selectedBurrow);
 
@@ -152,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPlacing(string burrowName, Sprite burrowImage)
     {
- 
+        //instantiates the objects depending on what the index was.
         currentInstance = Instantiate(burrowPrefab,instantiateParent);
         addedBurrowList.Add(currentInstance);
         int index = addedBurrowList.IndexOf(currentInstance);
@@ -204,6 +208,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateBurrowButton()
     {
+        //updates the values of the burrow piece menu, showing what pieces are available to the player.
         cornerText.text = cornerPieces.ToString();
         straightText.text = straightPieces.ToString();
         threeText.text = threePieces.ToString();
@@ -212,6 +217,7 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        //resets the game and all its values
         cornerPieces = startCornerPieces;
         straightPieces = startStraightPieces;
         threePieces = startThreePieces;
@@ -223,6 +229,7 @@ public class GameManager : MonoBehaviour
 
     public void CleanList(List<GameObject> list)
     {
+        //clears out the burrow list.
         for (int i = list.Count - 1; i >= 0; i--)
 {
         if (list[i] == null)
@@ -234,6 +241,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckForCompletion()
     {
+        //checks for the puzzle completion
         if(AreAllConditionsMet() == true)
         {
             Debug.Log("complete");

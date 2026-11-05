@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2434a4443ecf42aaa90843a15d17eb0, type: 3}
   m_Name: Squirrel_Level1
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
-  characterName: Bert
-  wantInfo_1: A bathroom
+  characterName: Squirrel 1
+  wantInfo_1: BLAH
   wantInfo_2: Not next to a chipmunk
   wantInfo_3: in the 2nd row
   characterSprite: {fileID: 21300000, guid: 1b605d49f0c45aa4887239f91507a1de, type: 3}

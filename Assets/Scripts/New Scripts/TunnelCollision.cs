@@ -8,15 +8,14 @@ public class TunnelCollision : MonoBehaviour
     public bool colliding = false;
     
 
-
+    //checks for colliders collision with one another.
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log ("Collision");
-        // Try to get the same script from the object passing through
+        //Debug.Log ("Collision");
         if (other.gameObject.CompareTag("Collider"))
         {
             colliding = true;
-            Debug.Log($"{gameObject.name} overlapped with another object running the SAME script: {other.gameObject.name}");
+           // Debug.Log($"{gameObject.name} overlapped with another object running the SAME script: {other.gameObject.name}");
         }
         
     }
@@ -24,7 +23,7 @@ public class TunnelCollision : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         colliding = false;
-        Debug.Log("Collision removed");
+        //Debug.Log("Collision removed");
 
     }
 

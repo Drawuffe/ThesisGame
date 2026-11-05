@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Blueprints : ScriptableObject
 {
 
-
+    //Scriptable object for the burrow pipes/holes being placed.
     public Sprite image;
     public string itemName;
     //public int cost;

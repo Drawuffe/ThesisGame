@@ -8,7 +8,7 @@ public class BurrowInfo : MonoBehaviour
     public int burrowIndex;
     public List<GameObject> colliders = new List<GameObject>();
 
-
+    //Holds the info from the scriptable object after the object is instantiated so it is accessable at anytime.
     public void StoreInfo(string burrowName_, Sprite burrowImage, int burrowIndex_)
     {
         burrowName = burrowName_;

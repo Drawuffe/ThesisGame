@@ -33,6 +33,7 @@ public class CharacterStored : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        //when an animal is clicked, then it updates the menu with the relavent information.
         characterText.characterImage.sprite = characterSprite;
         characterText.characterInfo.text = wantInfo_1;
         characterText.characterName.text = characterName;

@@ -28,6 +28,8 @@ public class CharacterInfo : MonoBehaviour
 
         for (int i = characters.Length - 1; i >= 0; i--) 
         {
+            //extracts all the information from all the animals in the list for the level and saves the information
+            //on a script attached to every item.
             CharacterSO selectedCharacter = characters[i];
             currentInstance = Instantiate(animalPrefab, parentTransform);
             selectedName = selectedCharacter.characterName;

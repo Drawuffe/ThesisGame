@@ -32,7 +32,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     // Update is called once per frame
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        
         GameManager.Instance.pieceButtons.SetActive(false); 
         moving = true;
         parentTransform = transform.parent;
@@ -97,7 +97,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            
+            //removes the piece and resets all its values.
             BurrowInfo pieceInfo = GetComponent<BurrowInfo>();
             if(pieceInfo.burrowName == "Corner")
             {
@@ -181,7 +181,7 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void ClearBurrowColliders(Transform currentTransform)
     {
-
+        //Clears the list of burrow coliders when an object is removed so they don't remain in the list
         for (int i = currentTransform.childCount - 1; i >= 0; i--)
         {
             GameManager.Instance.allColliders.Remove(currentTransform.GetChild(i).gameObject);

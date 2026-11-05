@@ -99,7 +99,8 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        //when a grid spot is clicked on and is not taken already, then the player can click and 
+        //view the menu of pieces to place.
         GameManager.Instance.instantiateParent = transform;
         if(transform.childCount == 1)
         {

@@ -41,6 +41,7 @@ public class CharacterInfo : MonoBehaviour
             Image image = currentInstance.GetComponent<Image>();
             image.sprite = selectedSprite;
             CharacterStored characterStored = currentInstance.GetComponent<CharacterStored>();
+            GameManager.Instance.animalList.Add(currentInstance);
             characterStored.StoreValues(selectedName, selectedWant1, selectedWant2, selectedWant3, selectedSprite, selectedPoints);
         }
 

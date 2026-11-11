@@ -9,4 +9,6 @@ public class CharacterSO : ScriptableObject
     public string wantInfo_3;
     public Sprite characterSprite;
     public int points;
+    public Sprite happyPlacedSprite;
+    public Sprite sadPlacedSprite;
 }

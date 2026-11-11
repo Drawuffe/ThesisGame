@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c184bab59bf48cc4e8f828bc937e1cf5
+guid: 08157a042682a4416ad84c26ed699368
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,30 +93,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BurrowSprieSheet_0
+      name: IMG_4128_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 760
-        width: 600
-        height: 600
+        x: 1086
+        y: 1028
+        width: 16
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89debe4f7ddacca46bf9110ae0d537b8
-      internalID: -2115968993
+      spriteID: 845f1d37b5cb649caab1b6ed8746604f
+      internalID: 1166315681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowSprieSheet_1
+      name: IMG_4128_1
       rect:
         serializedVersion: 2
-        x: 680
-        y: 760
-        width: 600
-        height: 600
+        x: 1102
+        y: 1020
+        width: 5
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4d1139c1ce89764f85d1d16e539f157
-      internalID: -1971499077
+      spriteID: 4cac49653e7b44ba19ecac3595c2a012
+      internalID: 258269355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowSprieSheet_2
+      name: IMG_4128_2
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 760
-        width: 600
-        height: 600
+        x: 155
+        y: 114
+        width: 692
+        height: 866
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88bc32bc1b87b41469f0cee806c5cbc1
-      internalID: 1616822167
+      spriteID: c31fdbfdd455c463c9d5a2e1c3c13dba
+      internalID: -1254296671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowSprieSheet_3
+      name: IMG_4128_3
       rect:
         serializedVersion: 2
-        x: 1960
-        y: 760
-        width: 600
-        height: 600
+        x: 1016
+        y: 113
+        width: 705
+        height: 900
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,96 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 161bd5f4c66bc63498d82e8c00bf4c1b
-      internalID: -1572744652
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BurrowSprieSheet_4
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 40
-        width: 600
-        height: 600
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 063233ab565eaf44f8773d9226f5be04
-      internalID: 630143252
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BurrowSprieSheet_5
-      rect:
-        serializedVersion: 2
-        x: 680
-        y: 40
-        width: 600
-        height: 600
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 534a58864839e30468c0a46796acf147
-      internalID: -1374512094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BurrowSprieSheet_6
-      rect:
-        serializedVersion: 2
-        x: 1320
-        y: 40
-        width: 600
-        height: 600
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a9b94abc9f319f458b278c8a3d03b33
-      internalID: 713806421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BurrowSprieSheet_7
-      rect:
-        serializedVersion: 2
-        x: 1960
-        y: 40
-        width: 600
-        height: 600
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 419c1e5179ca35348bc1663754c49206
-      internalID: -444270138
+      spriteID: e6fb296b681e04016aeb22528ee30d78
+      internalID: -276777450
       vertices: []
       indices: 
       edges: []
@@ -289,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d75f2441765bbe540961dfbc34c9efbd
+    spriteID: cb5922567b8954fdb8bc6de08da4cd0d
     internalID: 0
     vertices: []
     indices: 
@@ -299,16 +198,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":600.0,"y":600.0},"gridSpriteOffset":{"x":40.0,"y":40.0},"gridSpritePadding":{"x":40.0,"y":120.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      BurrowSprieSheet_0: -2115968993
-      BurrowSprieSheet_1: -1971499077
-      BurrowSprieSheet_2: 1616822167
-      BurrowSprieSheet_3: -1572744652
-      BurrowSprieSheet_4: 630143252
-      BurrowSprieSheet_5: -1374512094
-      BurrowSprieSheet_6: 713806421
-      BurrowSprieSheet_7: -444270138
+      IMG_4128_0: 1166315681
+      IMG_4128_1: 258269355
+      IMG_4128_2: -1254296671
+      IMG_4128_3: -276777450
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

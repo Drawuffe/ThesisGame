@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4062346377673580672}
   - component: {fileID: 6027746257328231655}
   - component: {fileID: 1912902106176074336}
-  m_Layer: 5
+  - component: {fileID: 6396077765301211653}
+  m_Layer: 3
   m_Name: AnimalPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,3 +95,17 @@ MonoBehaviour:
   wantInfo_3: 
   characterSprite: {fileID: 0}
   totalPoints: 0
+  characterText: {fileID: 0}
+--- !u!114 &6396077765301211653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504611475000529447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970302d0389d14503b9fcc261a6c9aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterMovement
+  characterParentTransform: {fileID: 0}

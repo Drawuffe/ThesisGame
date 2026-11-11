@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     public int fourPieces = 0;
     [Header("Button Text for Piece Menu")]
     public TextMeshProUGUI cornerText, straightText, threeText, fourText;
-    private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
     [Header("List of Possible Pieces")]
+    private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
     public Blueprints[] blueprints;
     public int pieceClicked = 0;
     private string selectedName;
@@ -33,8 +33,13 @@ public class GameManager : MonoBehaviour
     public List<GameObject> burrowColliders = new List<GameObject>();
     public List<GameObject> allColliders =  new List<GameObject>();
     public List<GameObject> burrowHoles =  new List<GameObject>();
+    public List<GameObject> burrowHomes =  new List<GameObject>();
+    public List<GameObject> animalList =  new List<GameObject>();
     public Image completionImage;
+    public Image completionImageAnimals;
     public AudioController audioController;
+    public bool characterMoving = false;
+    public CharacterInfo characterInfo;
     
 
 
@@ -49,7 +54,6 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        DontDestroyOnLoad(gameObject);
 
         UpdateBurrowButton();
 
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         pieceButtons.SetActive(false);
         completionImage.enabled = false;
+        completionImageAnimals.enabled = false;
         AudioController audioController = GetComponent<AudioController>();
         BurrowAdd();
     }
@@ -74,12 +79,12 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             foreach (GameObject obj in addedBurrowList)
-{
-            if (obj != null)
             {
-                Destroy(obj);
+                if (obj != null)
+                {
+                    Destroy(obj);
+                }
             }
-}
             addedBurrowList.Clear();
             cornerPieces = startCornerPieces;
             Reset();
@@ -225,6 +230,8 @@ public class GameManager : MonoBehaviour
         UpdateBurrowButton();
         allColliders.Clear();
         BurrowAdd();
+        ReparentAnimals();
+        
     }
 
     public void CleanList(List<GameObject> list)
@@ -245,13 +252,30 @@ public class GameManager : MonoBehaviour
         if(AreAllConditionsMet() == true)
         {
             Debug.Log("complete");
-            WhenComplete();
+            WhenCompletePipes();
         }
         else
         {
             Debug.Log("not complete");
             completionImage.enabled = false;
         }
+
+        if(CheckAnimalCompletion() == true)
+        {
+            
+            WhenCompleteAnimal();
+        }
+        else
+        {
+            completionImageAnimals.enabled = false;
+        }
+    }
+
+    public bool CheckAnimalCompletion()
+    {
+
+        return burrowHomes.All(obj => obj != null && obj.transform.Find("AnimalPrefab(Clone)") != null);
+
     }
 
     public bool AreAllConditionsMet()
@@ -280,10 +304,16 @@ public class GameManager : MonoBehaviour
         return true; 
     }
 
-    private void WhenComplete()
+    private void WhenCompletePipes()
     {
 
         completionImage.enabled = true;
+        audioController.PlayAudio(4);
+    }
+
+    private void WhenCompleteAnimal()
+    {
+        completionImageAnimals.enabled = true;
         audioController.PlayAudio(4);
     }
 
@@ -292,6 +322,15 @@ public class GameManager : MonoBehaviour
         foreach(GameObject go in burrowHoles)
         {
             allColliders.Add(go);
+        }
+    }
+
+    private void ReparentAnimals()
+    {
+        foreach(GameObject obj in animalList)
+        {
+            CharacterMovement characterMovement = obj.GetComponent<CharacterMovement>();
+            characterMovement.transform.SetParent(characterMovement.originalTransform);
         }
     }
 

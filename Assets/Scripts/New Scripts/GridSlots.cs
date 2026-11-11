@@ -11,15 +11,21 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Image highlightOverlay;
     [SerializeField] private Color validColor = new Color(0, 1, 0, 0.3f); // Green
     [SerializeField] private Color invalidColor = new Color(1, 0, 0, 0.3f); // Red
-    
+    public bool hasChild;
     private BurrowMovement burrowScript;
+    private CharacterMovement characterScript;
 
    
 
 
     void Start()
-    {
-        
+    {   
+        hasChild = transform.Find("BurrowHole") != null;
+       // burrowHomes = transform.Find("BurrowHole").GetComponent<GameObject>();
+        if(transform.Find("BurrowHole"))
+        {
+            GameManager.Instance.burrowHomes.Add(this.gameObject);
+        }
 
         if (highlightOverlay != null)
         {
@@ -30,7 +36,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(transform.childCount == 1)
+        if(transform.childCount == 1 && GameManager.Instance.characterMoving == false)
         {
             highlightOverlay.gameObject.SetActive(true);
             highlightOverlay.color = validColor;
@@ -39,10 +45,13 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             highlightOverlay.gameObject.SetActive(false);
         }
+
+        
         // Check if the user is currently dragging an item
         if (eventData.pointerDrag != null)
         {
             burrowScript  = eventData.pointerDrag.GetComponent<BurrowMovement>();
+            characterScript = eventData.pointerDrag.GetComponent<CharacterMovement>();
             
             if (burrowScript != null)
             {
@@ -66,6 +75,10 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                     highlightOverlay.color = invalidColor;
                 }
             }
+            if (characterScript!= null)
+            {
+                //change the highlight overlay here
+            }
         }
 
     }
@@ -73,10 +86,19 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnDrop(PointerEventData eventData)
     {
         
-        if(transform.childCount == 1)
+        if(transform.childCount == 1 && GameManager.Instance.characterMoving == false)
         {
-            GameObject dropped = eventData.pointerDrag;
+            //GameObject dropped = eventData.pointerDrag;
             burrowScript.parentTransform = transform;
+        }
+        if(transform.childCount == 2 && GameManager.Instance.characterMoving == true && transform.Find("BurrowHole"))
+        {
+            characterScript.characterParentTransform = transform;
+            characterScript.characterPlaced = true;
+        }
+        else
+        {
+            characterScript.characterPlaced = false;
         }
         
         if (highlightOverlay != null)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d819c46774e2656469c9aefd06c1b1fb
+guid: fc1a34c88f82349ea8955868aeac828c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,24 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_0
+      name: IMG_4073_0
       rect:
         serializedVersion: 2
         x: 40
@@ -125,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7225e9ab205ecd41bd9f85c94fab9df
-      internalID: -1127699080
+      spriteID: 372309e7665cc4017a2364252183b04e
+      internalID: -2101092992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_1
+      name: IMG_4073_1
       rect:
         serializedVersion: 2
         x: 680
@@ -147,14 +134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 435af3be500048b4b9d9ef4de79d368d
-      internalID: -1575445568
+      spriteID: 7f4b1b11dfc884f4d879642b88a17ca0
+      internalID: -834234017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_2
+      name: IMG_4073_2
       rect:
         serializedVersion: 2
         x: 1320
@@ -169,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 366ac2658748ee94dbf74587cd42f220
-      internalID: 1149766826
+      spriteID: 7fea491b9dab14058a0fdfdb55ccc94e
+      internalID: -2045118641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_3
+      name: IMG_4073_3
       rect:
         serializedVersion: 2
         x: 1960
@@ -191,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea00b58aec3c534cbdcd320c772c883
-      internalID: 1697449676
+      spriteID: e9cc48cbcfc474f59ba9d0725524edbe
+      internalID: -250610342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_4
+      name: IMG_4073_4
       rect:
         serializedVersion: 2
         x: 40
@@ -213,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4771b0db76a676f4998293dbf4a05d93
-      internalID: 687754217
+      spriteID: 4d10dd1bbcf99450fbf379de3107a52c
+      internalID: 1582253279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_5
+      name: IMG_4073_5
       rect:
         serializedVersion: 2
         x: 680
@@ -235,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f14c4803fa81e2458823fa09baed9d9
-      internalID: -1980469184
+      spriteID: 63fe3acb8743e44be8e1b978216d9a71
+      internalID: -1150162030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_6
+      name: IMG_4073_6
       rect:
         serializedVersion: 2
         x: 1320
@@ -257,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a5b4efc8dd1e504bae63ba143b87ae0
-      internalID: 1651443915
+      spriteID: e10d7e90c7c99485680fe40e3ac8c32d
+      internalID: 687781127
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BurrowPiecesWithBkg_SpriteSheet_7
+      name: IMG_4073_7
       rect:
         serializedVersion: 2
         x: 1960
@@ -279,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb17443120ae6744bb1d9e2905ef4f9
-      internalID: -667298485
+      spriteID: ea399c0633ce445cf8c08c772d727ea7
+      internalID: 975154948
       vertices: []
       indices: 
       edges: []
@@ -289,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3ac37b1b9d8a5b549981747a1fbdb8b3
+    spriteID: 486d4c2534eb740f89e44a5d9bb017d7
     internalID: 0
     vertices: []
     indices: 
@@ -301,14 +288,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":600.0,"y":600.0},"gridSpriteOffset":{"x":40.0,"y":40.0},"gridSpritePadding":{"x":40.0,"y":120.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      BurrowPiecesWithBkg_SpriteSheet_0: -1127699080
-      BurrowPiecesWithBkg_SpriteSheet_1: -1575445568
-      BurrowPiecesWithBkg_SpriteSheet_2: 1149766826
-      BurrowPiecesWithBkg_SpriteSheet_3: 1697449676
-      BurrowPiecesWithBkg_SpriteSheet_4: 687754217
-      BurrowPiecesWithBkg_SpriteSheet_5: -1980469184
-      BurrowPiecesWithBkg_SpriteSheet_6: 1651443915
-      BurrowPiecesWithBkg_SpriteSheet_7: -667298485
+      IMG_4073_0: -2101092992
+      IMG_4073_1: -834234017
+      IMG_4073_2: -2045118641
+      IMG_4073_3: -250610342
+      IMG_4073_4: 1582253279
+      IMG_4073_5: -1150162030
+      IMG_4073_6: 687781127
+      IMG_4073_7: 975154948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

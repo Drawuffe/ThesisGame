@@ -14,9 +14,7 @@ public class GameManager : MonoBehaviour
     public int straightPieces = 0;
     public int threePieces = 0;
     public int fourPieces = 0;
-    [Header("Button Text for Piece Menu")]
     public TextMeshProUGUI cornerText, straightText, threeText, fourText;
-    [Header("List of Possible Pieces")]
     private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
     public Blueprints[] blueprints;
     public int pieceClicked = 0;
@@ -256,7 +254,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("not complete");
+            //Debug.Log("not complete");
             completionImage.enabled = false;
         }
 
@@ -306,15 +304,29 @@ public class GameManager : MonoBehaviour
 
     private void WhenCompletePipes()
     {
-
-        completionImage.enabled = true;
-        audioController.PlayAudio(4);
+        if(completionImage.enabled == false)
+        {
+            completionImage.enabled = true;
+            audioController.PlayAudio(4);
+        }
+        else
+        {
+            //Debug.Log("already complete");
+        }
+       
     }
 
     private void WhenCompleteAnimal()
     {
-        completionImageAnimals.enabled = true;
-        audioController.PlayAudio(4);
+        if(completionImageAnimals.enabled == false)
+        {
+            completionImageAnimals.enabled = true;
+            audioController.PlayAudio(4);
+        }
+        else
+        {
+            //Debug.Log("already complete");
+        }
     }
 
     private void BurrowAdd()

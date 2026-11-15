@@ -60,6 +60,7 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             transform.SetParent(originalTransform);
+            GameManager.Instance.CheckForCompletion();
         }
     }
 

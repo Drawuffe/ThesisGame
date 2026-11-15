@@ -10,7 +10,11 @@ public class CharacterInfo : MonoBehaviour
     private GameObject currentInstance;
     public GameObject animalPrefab;
     private Transform parentTransform;
-    private string selectedName, selectedWant1, selectedWant2, selectedWant3;
+    public string selectedName, selectedCollisionName;
+    private string selectedWant1, selectedWant2, selectedWant3, selectedWant4;
+    private string animalRoom, animalRows, animalColumns;
+    private bool animalSmell, animalNoSmells;
+    private bool col_, row_, neigh_;
     private Sprite selectedSprite;
     private int selectedPoints;
 
@@ -22,7 +26,7 @@ public class CharacterInfo : MonoBehaviour
         SpawnAnimals();
     }
 
-    void SpawnAnimals()
+    public void SpawnAnimals()
     {
 
 
@@ -37,12 +41,25 @@ public class CharacterInfo : MonoBehaviour
             selectedWant1 = selectedCharacter.wantInfo_1;
             selectedWant2 = selectedCharacter.wantInfo_2;
             selectedWant3 = selectedCharacter.wantInfo_3;
+            selectedWant4 = selectedCharacter.wantInfo_4;
             selectedPoints = selectedCharacter.points;
+            animalRoom = selectedCharacter.animalRooms;
+            animalColumns = selectedCharacter.animalCol;
+            animalRows = selectedCharacter.animalRow;
+            animalSmell = selectedCharacter.animalSmells;
+            animalNoSmells = selectedCharacter.animalDoesNotLikeSmells;
+            col_ = selectedCharacter.checkCol;
+            row_ = selectedCharacter.checkRow;
+            neigh_ = selectedCharacter.checkNeigh;
             Image image = currentInstance.GetComponent<Image>();
             image.sprite = selectedSprite;
+            selectedCollisionName = selectedCharacter.animalCollision;
             CharacterStored characterStored = currentInstance.GetComponent<CharacterStored>();
             GameManager.Instance.animalList.Add(currentInstance);
-            characterStored.StoreValues(selectedName, selectedWant1, selectedWant2, selectedWant3, selectedSprite, selectedPoints);
+            characterStored.StoreValues(selectedName, selectedWant1, selectedWant2, selectedWant3, selectedWant4, selectedSprite, selectedPoints, selectedCollisionName, 
+            animalRoom, animalRows, animalColumns, animalSmell, animalNoSmells);
+            AnimalManager animalManager = currentInstance.GetComponent<AnimalManager>();
+            animalManager.StoreWants(selectedName, row_, col_, neigh_);
         }
 
     }

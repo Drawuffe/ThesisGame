@@ -11,23 +11,36 @@ public class CharacterStored : MonoBehaviour, IPointerClickHandler
     public string wantInfo_1;
     public string wantInfo_2;
     public string wantInfo_3;
+    public string wantInfo_4;
+    public string animalRooms, animalRow, animalCol;
+    public bool animalAwayFromSmells, animalSmells;
     public Sprite characterSprite;
     public int totalPoints;
     public CharacterText characterText;
+    public string animalCollsionName;
 
 
     void Start()
     {
         characterText = GameObject.FindGameObjectWithTag("CharacterText").GetComponent<CharacterText>();
     }
-    public void StoreValues(string name, string want1, string want2, string want3, Sprite characterImage, int points)
+    public void StoreValues(string name, string want1, string want2, string want3, string want4, Sprite characterImage, 
+    int points, string collisionName, string animalRoomWants, string animalRow_, string animalColumn, 
+    bool animalSmell, bool animalSmellPrefs)
     {
         characterName = name;
         wantInfo_1 = want1;
         wantInfo_2 = want2;
         wantInfo_3 = want3;
+        wantInfo_3 = want4;
         characterSprite = characterImage;
         totalPoints = points;
+        animalCollsionName = collisionName;
+        animalRooms = animalRoomWants;
+        animalCol = animalColumn;
+        animalRow = animalRow_;
+        animalSmells = animalSmell;
+        animalAwayFromSmells = animalSmellPrefs;
 
     }
 

@@ -8,6 +8,7 @@ public class Blueprints : ScriptableObject
     //Scriptable object for the burrow pipes/holes being placed.
     public Sprite image;
     public string itemName;
+    public bool roomCheck;
     //public int cost;
     //public int workersNeeded;
     //public bool collected = false;

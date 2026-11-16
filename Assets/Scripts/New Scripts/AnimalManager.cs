@@ -13,6 +13,7 @@ public class AnimalManager : MonoBehaviour
     public LayerMask hitLayers;
     private Transform colCollider, rowCollider, neighCollider;
     public bool requirmentsMeet;
+    private CharacterStored characterStored;
 
 
     void Start()
@@ -39,6 +40,15 @@ public class AnimalManager : MonoBehaviour
         }
         
         StartColliders();
+    }
+
+    void Update()
+    {
+        if(requirmentsMeet == true)
+        {
+            characterStored = GetComponent<CharacterStored>();
+            print(characterStored.characterName + "requirements complete");
+        }
     }
     public void StoreWants(string name, bool row, bool col, bool neigh)
     {

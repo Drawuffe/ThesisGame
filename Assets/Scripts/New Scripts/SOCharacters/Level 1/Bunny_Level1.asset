@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Bunny 1
   wantInfo_1: Same row as bunny 2
-  wantInfo_2: Not next to a chipmunk
-  wantInfo_3: in the 2nd row
+  wantInfo_2: 
+  wantInfo_3: 
   wantInfo_4: 
   characterSprite: {fileID: 21300000, guid: 1b605d49f0c45aa4887239f91507a1de, type: 3}
   points: 3
@@ -24,7 +24,7 @@ MonoBehaviour:
   checkRow: 1
   checkCol: 0
   checkNeigh: 0
-  animalCollision: Bunny2_Level1
+  animalCollision: Bunny 2
   animalRooms: 
   animalRow: 
   animalCol: 

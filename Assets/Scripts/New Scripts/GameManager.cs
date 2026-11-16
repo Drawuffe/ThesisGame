@@ -14,20 +14,24 @@ public class GameManager : MonoBehaviour
     public int straightPieces = 0;
     public int threePieces = 0;
     public int fourPieces = 0;
-    public TextMeshProUGUI cornerText, straightText, threeText, fourText;
+    public TextMeshProUGUI cornerText, straightText, threeText, fourText, poolText, kitchenText, livingRoomText, gardenText;
     private int startCornerPieces, startStraightPieces, startThreePieces, startFourPieces;
+    public int startPool = 0, startKitchen=0, startLivingRoom=0, startGarden=0;
     public Blueprints[] blueprints;
     public int pieceClicked = 0;
     private string selectedName;
     private Sprite selectedSprite;
-    public GameObject burrowPrefab;
+    private bool selectedRoom;
+    public GameObject burrowPrefab, roomPrefab;
     public Transform parentTransform;
     public GameObject newChild;
     private Vector3 worldPosition;
     private GameObject currentInstance;
     public Transform instantiateParent;
     public GameObject pieceButtons;
+    public GameObject roomPieceButtons;
     public List<GameObject> addedBurrowList = new List<GameObject>();
+    public List<GameObject> addedRoomList = new List<GameObject>();
     public List<GameObject> burrowColliders = new List<GameObject>();
     public List<GameObject> allColliders =  new List<GameObject>();
     public List<GameObject> burrowHoles =  new List<GameObject>();
@@ -52,13 +56,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-
-        UpdateBurrowButton();
-
-        startCornerPieces = cornerPieces;
-        startStraightPieces = straightPieces;
-        startThreePieces = threePieces;
-        startFourPieces = fourPieces;
+        
         
         
   
@@ -66,14 +64,27 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         pieceButtons.SetActive(false);
+        roomPieceButtons.SetActive(false);
         completionImage.enabled = false;
         completionImageAnimals.enabled = false;
         AudioController audioController = GetComponent<AudioController>();
+        startCornerPieces = cornerPieces;
+        startStraightPieces = straightPieces;
+        startThreePieces = threePieces;
+        startFourPieces = fourPieces;
+        startPool = LevelManager.Instance.poolPieces;
+        startKitchen = LevelManager.Instance.kitchenPieces;
+        startLivingRoom = LevelManager.Instance.livingRoomPieces;
+        startGarden = LevelManager.Instance.gardenPieces;
+        UpdateBurrowButton();
+        pieceButtons.SetActive(false);
+        roomPieceButtons.SetActive(false);
         BurrowAdd();
     }
 
     void Update()
     {
+        
         if(Input.GetKeyDown(KeyCode.R))
         {
             foreach (GameObject obj in addedBurrowList)
@@ -83,8 +94,14 @@ public class GameManager : MonoBehaviour
                     Destroy(obj);
                 }
             }
+            foreach (GameObject obj in addedRoomList)
+            {
+                if (obj != null)
+                {
+                    Destroy(obj);
+                }
+            }
             addedBurrowList.Clear();
-            cornerPieces = startCornerPieces;
             Reset();
         }
 
@@ -138,6 +155,46 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        if(piece is 4)
+        {
+            if(startPool > 0)
+            {
+                startPool -= 1;
+                poolText.text = startPool.ToString();
+                PieceFound();
+        
+                
+            }
+        }
+        if(piece is 5)
+        {
+            if(startKitchen > 0)
+            {
+                startKitchen -= 1;
+                kitchenText. text = startKitchen.ToString();
+                PieceFound();
+        
+            }
+        }
+        if(piece is 6)
+        {
+            if(startLivingRoom > 0)
+            {
+                startLivingRoom -= 1;
+                livingRoomText.text = startLivingRoom.ToString();
+                PieceFound();
+        
+            }
+        }
+        if(piece is 7)
+        {
+            if(startGarden > 0)
+            {
+                startGarden -= 1;
+                gardenText.text = startGarden.ToString();
+                PieceFound();
+            }
+        }
         else
         {
             Debug.Log("no piece");
@@ -153,59 +210,80 @@ public class GameManager : MonoBehaviour
 
         selectedName = selectedBurrow.name;
         selectedSprite = selectedBurrow.image;
-        StartPlacing(selectedName, selectedSprite);
+        selectedRoom = selectedBurrow.roomCheck;
+        //add bool to check if its a room or a path
+        StartPlacing(selectedName, selectedSprite, selectedRoom);
     }
 
 
-    public void StartPlacing(string burrowName, Sprite burrowImage)
+    public void StartPlacing(string burrowName, Sprite burrowImage, bool isRoom)
     {
-        //instantiates the objects depending on what the index was.
-        currentInstance = Instantiate(burrowPrefab,instantiateParent);
-        addedBurrowList.Add(currentInstance);
-        int index = addedBurrowList.IndexOf(currentInstance);
-        Image image = currentInstance.GetComponent<Image>();
-        image.sprite = burrowImage;
-    
-        if(burrowName == "Corner")
+        if(isRoom == false)
         {
-            Transform childTransform = currentInstance.transform.GetChild(1); 
-            Destroy(childTransform.gameObject);
             
-            childTransform = currentInstance.transform.GetChild(2);
-            Destroy(childTransform.gameObject);
-            
-        }
-        if(burrowName == "Straight")
-        {
-            Transform childTransform = currentInstance.transform.GetChild(0); 
-            Destroy(childTransform.gameObject);
-            childTransform= currentInstance.transform.GetChild(2);
-            Destroy(childTransform.gameObject);
-            
-        }
-        if(burrowName == "Three")
-        {
-            Transform childTransform = currentInstance.transform.GetChild(0); 
-            Destroy(childTransform.gameObject);
-            
-        }
+            //instantiates the objects depending on what the index was.
+            currentInstance = Instantiate(burrowPrefab,instantiateParent);
+            addedBurrowList.Add(currentInstance);
+            int index = addedBurrowList.IndexOf(currentInstance);
+            Image image = currentInstance.GetComponent<Image>();
+            image.sprite = burrowImage;
         
-        if (currentInstance != null)
-        {
-            foreach (Transform childTransform in currentInstance.transform)
+            if(burrowName == "Corner")
             {
-                burrowColliders.Add(childTransform.gameObject);
+                Transform childTransform = currentInstance.transform.GetChild(1); 
+                Destroy(childTransform.gameObject);
+                
+                childTransform = currentInstance.transform.GetChild(2);
+                Destroy(childTransform.gameObject);
+                
             }
+            if(burrowName == "Straight")
+            {
+                Transform childTransform = currentInstance.transform.GetChild(0); 
+                Destroy(childTransform.gameObject);
+                childTransform= currentInstance.transform.GetChild(2);
+                Destroy(childTransform.gameObject);
+                
+            }
+            if(burrowName == "Three")
+            {
+                Transform childTransform = currentInstance.transform.GetChild(0); 
+                Destroy(childTransform.gameObject);
+                
+            }
+            
+            if (currentInstance != null)
+            {
+                foreach (Transform childTransform in currentInstance.transform)
+                {
+                    burrowColliders.Add(childTransform.gameObject);
+                }
+            }
+            BurrowInfo burrowInfo = currentInstance.GetComponent<BurrowInfo>();
+            burrowInfo.AssignColliders(burrowColliders);
+            burrowInfo.StoreInfo(burrowName, burrowImage, index);
+            pieceButtons.SetActive(false);
+            allColliders.AddRange(burrowColliders);
+            burrowColliders.Clear();
+            CleanList(allColliders);
+            audioController.PlayAudio(1);
+            CheckForCompletion();
+            
         }
-        BurrowInfo burrowInfo = currentInstance.GetComponent<BurrowInfo>();
-        burrowInfo.AssignColliders(burrowColliders);
-        burrowInfo.StoreInfo(burrowName, burrowImage, index);
-        pieceButtons.SetActive(false);
-        allColliders.AddRange(burrowColliders);
-        burrowColliders.Clear();
-        CleanList(allColliders);
-        audioController.PlayAudio(1);
-        CheckForCompletion();
+        else
+        {
+            
+            currentInstance = Instantiate(roomPrefab,instantiateParent);
+            addedBurrowList.Add(currentInstance);
+            Image image = currentInstance.GetComponent<Image>();
+            image.sprite = burrowImage;
+            addedRoomList.Add(currentInstance);
+            RoomAddons roomAddons = currentInstance.GetComponent<RoomAddons>();
+            roomAddons.StoreInfo(burrowName, burrowImage);
+            roomPieceButtons.SetActive(false);
+            audioController.PlayAudio(1);
+            CheckForCompletion();
+        }
 
     }
 
@@ -216,6 +294,10 @@ public class GameManager : MonoBehaviour
         straightText.text = straightPieces.ToString();
         threeText.text = threePieces.ToString();
         fourText.text = fourPieces.ToString();
+        poolText.text = startPool.ToString();
+        kitchenText. text = startKitchen.ToString();
+        livingRoomText.text = startLivingRoom.ToString();
+        gardenText.text = startGarden.ToString();
     }
 
     public void Reset()
@@ -225,6 +307,10 @@ public class GameManager : MonoBehaviour
         straightPieces = startStraightPieces;
         threePieces = startThreePieces;
         fourPieces = startFourPieces;
+        startPool = LevelManager.Instance.poolPieces;
+        startKitchen = LevelManager.Instance.kitchenPieces;
+        startLivingRoom = LevelManager.Instance.livingRoomPieces;
+        startGarden = LevelManager.Instance.gardenPieces;
         UpdateBurrowButton();
         allColliders.Clear();
         BurrowAdd();
@@ -236,25 +322,28 @@ public class GameManager : MonoBehaviour
     {
         //clears out the burrow list.
         for (int i = list.Count - 1; i >= 0; i--)
-{
-        if (list[i] == null)
         {
-            list.RemoveAt(i); 
+            if (list[i] == null)
+            {
+                list.RemoveAt(i); 
+            }
         }
-}
+
+        
     }
 
     public void CheckForCompletion()
     {
+        
         //checks for the puzzle completion
         if(AreAllConditionsMet() == true)
         {
-            Debug.Log("complete");
+            
             WhenCompletePipes();
         }
         else
         {
-            //Debug.Log("not complete");
+            
             completionImage.enabled = false;
         }
 
@@ -285,7 +374,7 @@ public class GameManager : MonoBehaviour
   
             if (go.TryGetComponent<TunnelCollision>(out var script))
             {
-
+                
                 if (!script.colliding)
                 {
                     return false; 
@@ -294,7 +383,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-
+                
                 return false; 
             }
         }

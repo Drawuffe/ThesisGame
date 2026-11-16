@@ -18,6 +18,10 @@ TagManager:
   - Row
   - Neighbor
   - Animal
+  - Pool
+  - Kitchen
+  - LivingRoom
+  - Garden
   layers:
   - Default
   - TransparentFX
@@ -25,8 +29,8 @@ TagManager:
   - GridEffect
   - Water
   - UI
-  - 
-  - 
+  - CheckCol
+  - PipeCol
   - 
   - 
   - 

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Straight
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
   image: {fileID: -2101092992, guid: fc1a34c88f82349ea8955868aeac828c, type: 3}
-  itemName: Red
+  itemName: Straight
+  roomCheck: 0

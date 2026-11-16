@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6846544464956872399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3871297524117179865
 CanvasRenderer:
@@ -193,4 +193,3 @@ MonoBehaviour:
   validColor: {r: 0, g: 1, b: 0, a: 0.3}
   invalidColor: {r: 1, g: 0, b: 0, a: 0.3}
   hasChild: 0
-  burrowHomes: {fileID: 0}

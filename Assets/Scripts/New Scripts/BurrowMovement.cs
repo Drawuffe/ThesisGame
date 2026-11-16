@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
-public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
 
     public bool canClick = false;
@@ -15,6 +15,9 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     float duration = 0.3f;
     private Color originalColor;
     private int selectedIndex;
+    private float elapsedTime = 0f;
+    private float holdTime = .3f;
+    private bool isHolding = false;
     
 
 
@@ -28,12 +31,26 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         
 
     }
+    void Update()
+    {
+        if(isHolding == true)
+        {
+            elapsedTime += Time.deltaTime;
+        }
+
+        if(elapsedTime >= holdTime && moving == false)
+        {
+            GameManager.Instance.roomPieceButtons.SetActive(true);
+            GameManager.Instance.roomPieceButtons.transform.position = transform.position;
+        }
+    }
 
     // Update is called once per frame
     public void OnBeginDrag(PointerEventData eventData)
     {
         
         GameManager.Instance.pieceButtons.SetActive(false); 
+        GameManager.Instance.roomPieceButtons.SetActive(false);
         moving = true;
         parentTransform = transform.parent;
         image.raycastTarget = false;
@@ -84,48 +101,80 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         GameManager.Instance.CheckForCompletion();
     }
 
- 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
+        GameManager.Instance.instantiateParent = rectTransform.parent;
         GameManager.Instance.pieceButtons.SetActive(false);
+        GameManager.Instance.roomPieceButtons.SetActive(false);
+        isHolding = true;
+        
 
+  
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
 
-        if(!moving)
+        isHolding = false;
+        
+
+        if(elapsedTime <= holdTime && !moving)
         {
             TriggerRotation();
+            elapsedTime = 0;
         }
+        else
+        {
 
+            elapsedTime = 0;
+            
+            
+        }
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
+        GameManager.Instance.pieceButtons.SetActive(false);
+        
+        
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             //removes the piece and resets all its values.
             BurrowInfo pieceInfo = GetComponent<BurrowInfo>();
             if(pieceInfo.burrowName == "Corner")
             {
+                
                 GameManager.Instance.cornerPieces += 1;
                 ClearBurrowColliders(transform);
                 GameManager.Instance.UpdateBurrowButton();
-                Debug.Log(pieceInfo.burrowIndex);
-                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
                 Destroy(this.gameObject); 
+                Debug.Log(pieceInfo.burrowIndex);
+                pieceInfo.burrowIndex = GameManager.Instance.addedBurrowList.IndexOf(this.gameObject);
+                GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
+               
+                
 
 
             }
             if(pieceInfo.burrowName == "Straight")
             {
+                
                 GameManager.Instance.straightPieces += 1;
                 ClearBurrowColliders(transform);
                 Destroy(this.gameObject); 
                 GameManager.Instance.UpdateBurrowButton();
+                pieceInfo.burrowIndex = GameManager.Instance.addedBurrowList.IndexOf(this.gameObject);
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
 
                 
             }
             if(pieceInfo.burrowName == "Three")
             {
+                
                 GameManager.Instance.threePieces += 1;
                 ClearBurrowColliders(transform);
                 Destroy(this.gameObject); 
                 GameManager.Instance.UpdateBurrowButton();
+                pieceInfo.burrowIndex = GameManager.Instance.addedBurrowList.IndexOf(this.gameObject);
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
                 
                 
@@ -137,11 +186,14 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 ClearBurrowColliders(transform);
                 Destroy(this.gameObject); 
                 GameManager.Instance.UpdateBurrowButton();
+                pieceInfo.burrowIndex = GameManager.Instance.addedBurrowList.IndexOf(this.gameObject);
                 GameManager.Instance.addedBurrowList.RemoveAt(pieceInfo.burrowIndex);
                 
     
                 
             }
+            
+            GameManager.Instance.CheckForCompletion();
         }
 
         
@@ -154,6 +206,8 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         {
             StartCoroutine(RotateRoutine(-90f));
             GameManager.Instance.audioController.PlayAudio(3);
+            GameManager.Instance.CleanList(GameManager.Instance.allColliders);
+            
         }
     }
 
@@ -175,8 +229,9 @@ public class BurrowMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
         // Ensure it snaps perfectly to the final target angle
         transform.rotation = targetRotation; 
-        isRotating = false;
         GameManager.Instance.CheckForCompletion();
+        isRotating = false;
+        
     }
 
     public void ClearBurrowColliders(Transform currentTransform)

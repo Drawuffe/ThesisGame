@@ -13,13 +13,20 @@ MonoBehaviour:
   m_Name: Squirrel_Level1
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Squirrel 1
-  wantInfo_1: Next to Squirrel 2
-  wantInfo_2: Not next to a chipmunk
-  wantInfo_3: in the 2nd row
+  wantInfo_1: Same Col as squirrel 2
+  wantInfo_2: 
+  wantInfo_3: 
+  wantInfo_4: 
   characterSprite: {fileID: 21300000, guid: 1b605d49f0c45aa4887239f91507a1de, type: 3}
   points: 3
   happyPlacedSprite: {fileID: 0}
   sadPlacedSprite: {fileID: 0}
   checkRow: 0
-  checkCol: 0
-  checkNeigh: 1
+  checkCol: 1
+  checkNeigh: 0
+  animalCollision: Squirrel 2
+  animalRooms: 
+  animalRow: 
+  animalCol: 
+  animalSmells: 0
+  animalDoesNotLikeSmells: 0

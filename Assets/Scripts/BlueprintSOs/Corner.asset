@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Corner
   m_EditorClassIdentifier: Assembly-CSharp::Blueprints
   image: {fileID: 1582253279, guid: fc1a34c88f82349ea8955868aeac828c, type: 3}
-  itemName: Blue
+  itemName: Corner
+  roomCheck: 0

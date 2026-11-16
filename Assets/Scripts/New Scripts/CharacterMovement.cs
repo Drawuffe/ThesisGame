@@ -61,6 +61,9 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         {
             transform.SetParent(originalTransform);
             GameManager.Instance.CheckForCompletion();
+            AnimalCollision animalCollision = GetComponentInChildren<AnimalCollision>();
+            animalCollision.animalCollision = false;
+    
         }
     }
 

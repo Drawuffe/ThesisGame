@@ -11,19 +11,45 @@ public class TunnelCollision : MonoBehaviour
     //checks for colliders collision with one another.
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log ("Collision");
+        if (other.CompareTag("Column"))
+        {
+            return;
+        }
+        if(other.CompareTag("Row"))
+        {
+            return;
+        }
+        if(other.CompareTag("Neighbor"))
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Collider"))
         {
             colliding = true;
-           // Debug.Log($"{gameObject.name} overlapped with another object running the SAME script: {other.gameObject.name}");
+            //Debug.Log($"{gameObject.name} overlapped with another object running the SAME script: {other.gameObject.name}");
         }
         
     }
 
     private void OnTriggerExit(Collider other)
     {
-        colliding = false;
-        //Debug.Log("Collision removed");
+        if (other.CompareTag("Column"))
+        {
+            return;
+        }
+        if(other.CompareTag("Row"))
+        {
+            return;
+        }
+        if(other.CompareTag("Neighbor"))
+        {
+            return;
+        }
+        if (other.gameObject.CompareTag("Collider"))
+        {
+            colliding = false;
+            //Debug.Log($"{gameObject.name} overlapped with another object running the SAME script: {other.gameObject.name}");
+        }
 
     }
 

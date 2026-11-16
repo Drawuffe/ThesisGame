@@ -46,6 +46,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             highlightOverlay.gameObject.SetActive(false);
         }
 
+
         
         // Check if the user is currently dragging an item
         if (eventData.pointerDrag != null)
@@ -98,7 +99,11 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
         else
         {
-            characterScript.characterPlaced = false;
+            if(characterScript!=null)
+            {
+                characterScript.characterPlaced = false;
+            }
+            
         }
         
         if (highlightOverlay != null)
@@ -127,6 +132,7 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if(transform.childCount == 1)
         {
             GameManager.Instance.pieceButtons.SetActive(true);
+            GameManager.Instance.roomPieceButtons.SetActive(false);
             GameManager.Instance.pieceButtons.transform.position = transform.position;
 
         }
@@ -134,6 +140,10 @@ public class GridSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             GameManager.Instance.pieceButtons.SetActive(false);
         }
+
+        
+        
+    
 
     }
   

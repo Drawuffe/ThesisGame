@@ -986,6 +986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985860430}
+  - component: {fileID: 985860431}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1008,6 +1009,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985860431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985860429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a3be34fbdab4571bcfc68af900a5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  biome1_Completed: 0
+  level1_Completed: 0
+  level2_Completed: 0
+  level3_Completed: 0
+  level4_Completed: 0
+  level1_AnimalReqCompleted: 0
+  level2_AnimalReqCompleted: 0
+  level3_AnimalReqCompleted: 0
+  level4_AnimalReqCompleted: 0
+  level1_PipeMin: 0
+  level2_PipeMin: 0
+  level3_PipeMin: 0
+  level4_PipeMin: 0
+  poolPieces: 0
+  kitchenPieces: 0
+  LivingRoomPieces: 0
+  gardenPieces: 0
 --- !u!1 &1213074409
 GameObject:
   m_ObjectHideFlags: 0

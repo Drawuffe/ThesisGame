@@ -15,7 +15,7 @@ public class CharacterInfo : MonoBehaviour
     private string animalRoom, animalRows, animalColumns;
     private bool animalSmell, animalNoSmells;
     private bool col_, row_, neigh_;
-    private Sprite selectedSprite;
+    private Sprite selectedSprite, selectedHappy, selectedSad;
     private int selectedPoints;
 
 
@@ -38,6 +38,8 @@ public class CharacterInfo : MonoBehaviour
             currentInstance = Instantiate(animalPrefab, parentTransform);
             selectedName = selectedCharacter.characterName;
             selectedSprite = selectedCharacter.characterSprite;
+            selectedHappy = selectedCharacter.happyPlacedSprite;
+            selectedSad = selectedCharacter.sadPlacedSprite;
             selectedWant1 = selectedCharacter.wantInfo_1;
             selectedWant2 = selectedCharacter.wantInfo_2;
             selectedWant3 = selectedCharacter.wantInfo_3;
@@ -59,7 +61,7 @@ public class CharacterInfo : MonoBehaviour
             characterStored.StoreValues(selectedName, selectedWant1, selectedWant2, selectedWant3, selectedWant4, selectedSprite, selectedPoints, selectedCollisionName, 
             animalRoom, animalRows, animalColumns, animalSmell, animalNoSmells);
             AnimalManager animalManager = currentInstance.GetComponent<AnimalManager>();
-            animalManager.StoreWants(selectedName, row_, col_, neigh_);
+            animalManager.StoreWants(selectedName, row_, col_, neigh_, selectedHappy, selectedSad);
         }
 
     }

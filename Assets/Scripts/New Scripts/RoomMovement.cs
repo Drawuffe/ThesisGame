@@ -8,11 +8,13 @@ public class RoomMovement : MonoBehaviour, IPointerClickHandler
 {
    public void OnPointerClick(PointerEventData eventData)
     {
-        
+       
         GameManager.Instance.roomPieceButtons.SetActive(false);
+      
         
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            
             //removes the piece and resets all its values.
             RoomAddons roomAddons = GetComponent<RoomAddons>();
             if(roomAddons.roomName == "Pool")
@@ -57,6 +59,9 @@ public class RoomMovement : MonoBehaviour, IPointerClickHandler
 
                 
             }
+
+
+            
         }
 
         

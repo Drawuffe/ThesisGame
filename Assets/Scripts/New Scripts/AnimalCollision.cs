@@ -7,6 +7,8 @@ public class AnimalCollision : MonoBehaviour
 {
     private CharacterStored characterStored;
     private AnimalManager animalManager;
+    private HashSet<Collider> _occupants = new HashSet<Collider>();
+    private List<Collider> _toRemove = new List<Collider>();
 
     public bool animalCollision, animalRoom, animalColRow, animalSmell;
     void Start()
@@ -16,13 +18,28 @@ public class AnimalCollision : MonoBehaviour
         
 
     }
-    
-    void Update()
+    private void FixedUpdate()
     {
-        CheckRequirements();
-    }
+        _toRemove.Clear();
 
-    private void OnTriggerStay(Collider other)
+        foreach (Collider col in _occupants)
+        {
+            
+            if (col == null || !col.enabled || !col.gameObject.activeInHierarchy)
+            {
+                _toRemove.Add(col);
+            }
+        }
+
+        foreach (Collider col in _toRemove)
+        {
+            _occupants.Remove(col);
+            HandleColliderLeft(col);
+        }
+    }
+    
+
+    private void OnTriggerEnter(Collider other)
     {
 
         if (other.CompareTag("Collider") || other.gameObject == this.gameObject)
@@ -33,70 +50,31 @@ public class AnimalCollision : MonoBehaviour
         Transform grandparent = transform.parent.parent;
         if(grandparent.name == "Characters")
         {
-            //Debug.Log("Object has not been moved yet");
-            //animalCollision = false;
-            animalCollision = false;
             return;
-
         }
+
         if(other.transform.parent.parent.name == "Characters")
         {
-            animalCollision = false;
-            
             return;
-
         }
+        
         else
         {
-        
-        
             if(characterStored.wantInfo_1!= "")
             {
-                if (gameObject.CompareTag("Row") && other.gameObject.CompareTag("Row"))
+                if(other.gameObject.GetComponentInParent<RoomAddons>())
                 {
-                    //Debug.Log("Rows colliding");
+                    
+                }
+                else
+                {
                     if(other.gameObject.GetComponentInParent<CharacterStored>().characterName == characterStored.animalCollsionName)
                     { 
                         animalCollision = true;
-                       
-                        
-                        //Debug.Log(transform.parent + "meets the row requirements with"+ other.transform.parent);
+                        CheckRequirements();
                         
                     }
- 
-                    
-            
                 }
-                else if (gameObject.CompareTag("Column") && other.gameObject.CompareTag("Column"))
-                {
-                    
-                    
-                    if(other.gameObject.GetComponentInParent<CharacterStored>().characterName == characterStored.animalCollsionName)
-                    { 
-                        animalCollision = true;
-                        
-                        //Debug.Log("animals colliding with the right column requirements");
-                            
-                    }
-
-
-                    
-                }
-                else if (gameObject.CompareTag("Neighbor") && other.gameObject.CompareTag("Neighbor"))
-                {
-                    
-                    
-                    if(other.gameObject.GetComponentInParent<CharacterStored>().characterName == characterStored.animalCollsionName)
-                    { 
-                        animalCollision = true;
-                        
-                        //Debug.Log("animals colliding with the right neighbor requirements");
-                        
-                    }
-
-            
-                }
-                
                 
                     
             }
@@ -104,70 +82,75 @@ public class AnimalCollision : MonoBehaviour
             {
                 Debug.Log("Want1, not needed for this object");
                 animalCollision = true;
+                CheckRequirements();
                 
             }
 
+
             if(characterStored.wantInfo_2!= "")
             {
-                if (gameObject.CompareTag("Neighbor"))
+                
+                if(other.transform.parent.CompareTag("Room"))
                 {
-                    if(other.gameObject.CompareTag("Neighbor"))
+                    
+                    if(gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Pool" && other.GetComponentInParent<RoomAddons>().roomName == "Pool")
                     {
-                        if(other.transform.parent.CompareTag("Pool") && gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Pool")
-                        {
-                            animalRoom = true;
+                        
                             
-                        }
-                    }
-                    if(other.gameObject.CompareTag("Neighbor"))
-                    {
-                        if(other.transform.parent.CompareTag("Kitchen") && gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Kitchen")
-                        {
-                            animalRoom = true;
-                            
-                        }
-                    }
-                    if(other.gameObject.CompareTag("Neighbor"))
-                    {
-                        if(other.transform.parent.CompareTag("LivingRoom") && gameObject.GetComponentInParent<CharacterStored>().animalRooms == "LivingRoom")
-                        {
-                            animalRoom = true;
-                           
-                        }
-                    }
-                    if(other.gameObject.CompareTag("Neighbor"))
-                    {
-                        if(other.transform.parent.CompareTag("Garden") && gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Garden")
-                        {
-                            animalRoom = true;
-                            
-                        }
-                    }
+                        animalRoom = true;
+                        CheckRequirements();
+                        _occupants.Add(other);
+                        
 
+                    }
+                    if(gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Kitchen" && other.GetComponentInParent<RoomAddons>().roomName == "Kitchen")
+                    {
+                        
+                            
+                        animalRoom = true;
+                        CheckRequirements();
+                        _occupants.Add(other);
+                        
+                    }
+                    if(gameObject.GetComponentInParent<CharacterStored>().animalRooms == "LivingRoom" && other.GetComponentInParent<RoomAddons>().roomName == "LivingRoom")
+                    {
+
+                        animalRoom = true;
+                        CheckRequirements();
+                        _occupants.Add(other);
+   
+                    }
+                    if(gameObject.GetComponentInParent<CharacterStored>().animalRooms == "Garden" && other.GetComponentInParent<RoomAddons>().roomName == "Garden")
+                    {
+
+                        animalRoom = true;
+                        CheckRequirements();
+                        _occupants.Add(other);
+
+                    }
+                    
+                    
                 }
+
+
             }
             else
             {
-                //no want 2 needed
+                Debug.Log("Want2, not needed for this object");
                 animalRoom = true;
+                CheckRequirements();
                 
             }
 
             if(characterStored.wantInfo_3!= "")
             {
-                if (gameObject.CompareTag("Row"))
-                {
-                //   if(other.gameObject.CompareTag("Row") && //other gameobject collided is named row(rowneeded))
-                }
-                if (gameObject.CompareTag("Column"))
-                {
-                    //   if(other.gameObject.CompareTag("Column") && //other gameobject collided is named column(column needed))
-                }
-                //want 3 animal colum/row requiremet
+                
             }
             else
             {
+                Debug.Log("Want3, not needed for this object");
                 animalColRow = true;
+                CheckRequirements();
                 
             }
 
@@ -184,18 +167,15 @@ public class AnimalCollision : MonoBehaviour
             else
             {
                 animalSmell = true;
+                CheckRequirements();
                 
             }
-
-            
-
                 
         }
         
     }
     
 
-    
 
     private void OnTriggerExit(Collider other)
     {
@@ -203,36 +183,43 @@ public class AnimalCollision : MonoBehaviour
         {
             return;
         }
-        if (gameObject.CompareTag("Row") && other.gameObject.CompareTag("Row"))
+        
+        if(other.gameObject.GetComponentInParent<CharacterStored>()!=null)
         {
-            animalCollision = false;
-            
-    
+            if(other.gameObject.GetComponentInParent<CharacterStored>().animalCollsionName == characterStored.characterName)
+            { 
+                animalCollision = false;
+                CheckRequirements();
+                
+            }
+  
         }
-        if (gameObject.CompareTag("Column") && other.gameObject.CompareTag("Column"))
+
+        if (_occupants.Remove(other))
         {
-            animalCollision = false;
-            
-          
+            HandleColliderLeft(other);
         }
-        if (gameObject.CompareTag("Neighbor") && other.gameObject.CompareTag("Neighbor"))
-        {
-            animalCollision = false;
-            
-            
-        }
+ 
 
     }
 
     public void CheckRequirements()
     {
+        
         if(animalCollision == true && animalColRow == true && animalRoom == true && animalSmell == true)
         {
             animalManager.requirmentsMeet = true;
+            animalManager.ChangeAnimalSprite();
         }
         else
         {
             animalManager.requirmentsMeet = false;
+            animalManager.ChangeAnimalSprite();
         }
+    }
+    private void HandleColliderLeft(Collider col)
+    {
+        animalRoom = false;
+        CheckRequirements();
     }
 }

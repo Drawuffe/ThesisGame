@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
     private Image image;
     public bool characterPlaced = false;
     public Transform originalTransform;
+    private AnimalCollision animalCollision;
+   
     
 
 
@@ -26,6 +28,8 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         image = GetComponent<Image>();
         originalTransform = transform.parent;
         
+        
+        
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -35,7 +39,7 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         image.raycastTarget = false;
         rectTransform.SetParent(rectTransform.root);
         rectTransform.SetAsLastSibling();
-
+        
 
     }
 
@@ -52,6 +56,9 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         transform.SetParent(characterParentTransform);
         image.raycastTarget = true;
         GameManager.Instance.CheckForCompletion();
+        animalCollision = GetComponentInChildren<AnimalCollision>();
+        animalCollision.CheckRequirements();
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -61,8 +68,7 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         {
             transform.SetParent(originalTransform);
             GameManager.Instance.CheckForCompletion();
-            AnimalCollision animalCollision = GetComponentInChildren<AnimalCollision>();
-            animalCollision.animalCollision = false;
+            
     
         }
     }

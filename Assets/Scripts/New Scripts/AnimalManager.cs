@@ -14,10 +14,13 @@ public class AnimalManager : MonoBehaviour
     private Transform colCollider, rowCollider, neighCollider;
     public bool requirmentsMeet;
     private CharacterStored characterStored;
+    public Image currentImage;
+    private Sprite happySprite, sadSprite;
 
 
     void Start()
     {
+        
         for (int i=0; i<transform.childCount; i++)
         {
             if(transform.GetChild(i).CompareTag("Row"))
@@ -42,20 +45,42 @@ public class AnimalManager : MonoBehaviour
         StartColliders();
     }
 
-    void Update()
+
+    public void ChangeAnimalSprite()
     {
-        if(requirmentsMeet == true)
+        characterStored = GetComponent<CharacterStored>();
+        currentImage = GetComponent<Image>();
+
+        if(transform.parent.name == "Characters")
         {
-            characterStored = GetComponent<CharacterStored>();
-            print(characterStored.characterName + "requirements complete");
+            currentImage.sprite = characterStored.characterSprite;
+
         }
+        else
+        {
+            if(requirmentsMeet == true)
+            {
+                
+                print(characterStored.characterName + "requirements complete");
+                currentImage.sprite = happySprite;
+                
+            }
+            else
+            {
+                currentImage.sprite = sadSprite;
+            }
+        }
+        
+        
     }
-    public void StoreWants(string name, bool row, bool col, bool neigh)
+    public void StoreWants(string name, bool row, bool col, bool neigh, Sprite happyImage, Sprite sadImage)
     {
         animalName = name;
         checkRow = row;
         checkCol = col;
         checkNeigh = neigh;
+        happySprite = happyImage;
+        sadSprite = sadImage;
 
        //StartColliders();
     }

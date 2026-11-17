@@ -22,6 +22,7 @@ TagManager:
   - Kitchen
   - LivingRoom
   - Garden
+  - Room
   layers:
   - Default
   - TransparentFX

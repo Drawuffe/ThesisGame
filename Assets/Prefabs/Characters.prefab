@@ -97,8 +97,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 50, y: 100}
-  m_Spacing: {x: 10, y: 0}
+  m_CellSize: {x: 50, y: 50}
+  m_Spacing: {x: 5, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &6162451870664758506
@@ -115,3 +115,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInfo
   characters: []
   animalPrefab: {fileID: 0}
+  selectedName: 
+  selectedCollisionName: 

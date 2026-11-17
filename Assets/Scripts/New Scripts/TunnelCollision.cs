@@ -23,6 +23,14 @@ public class TunnelCollision : MonoBehaviour
         {
             return;
         }
+        if(other.CompareTag("Room"))
+        {
+            return;
+        }
+        if(other.CompareTag("Animal"))
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Collider"))
         {
             colliding = true;
@@ -31,6 +39,30 @@ public class TunnelCollision : MonoBehaviour
         
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+        if (other.CompareTag("Column"))
+        {
+            return;
+        }
+        if(other.CompareTag("Row"))
+        {
+            return;
+        }
+        if(other.CompareTag("Neighbor"))
+        {
+            return;
+        }
+        if(other.CompareTag("Room"))
+        {
+            return;
+        }
+        if(other.CompareTag("Animal"))
+        {
+            return;
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Column"))
@@ -42,6 +74,14 @@ public class TunnelCollision : MonoBehaviour
             return;
         }
         if(other.CompareTag("Neighbor"))
+        {
+            return;
+        }
+        if(other.CompareTag("Room"))
+        {
+            return;
+        }
+        if(other.CompareTag("Animal"))
         {
             return;
         }

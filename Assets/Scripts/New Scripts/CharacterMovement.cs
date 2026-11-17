@@ -68,6 +68,8 @@ public class CharacterMovement : MonoBehaviour, IDragHandler, IBeginDragHandler,
         {
             transform.SetParent(originalTransform);
             GameManager.Instance.CheckForCompletion();
+            AnimalManager animalMan = GetComponent<AnimalManager>();
+            animalMan.SetSpriteDefault();
             
     
         }

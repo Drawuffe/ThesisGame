@@ -57,7 +57,7 @@ public class CharacterInfo : MonoBehaviour
             image.sprite = selectedSprite;
             selectedCollisionName = selectedCharacter.animalCollision;
             CharacterStored characterStored = currentInstance.GetComponent<CharacterStored>();
-            GameManager.Instance.animalList.Add(currentInstance);
+
             characterStored.StoreValues(selectedName, selectedWant1, selectedWant2, selectedWant3, selectedWant4, selectedSprite, selectedPoints, selectedCollisionName, 
             animalRoom, animalRows, animalColumns, animalSmell, animalNoSmells);
             AnimalManager animalManager = currentInstance.GetComponent<AnimalManager>();

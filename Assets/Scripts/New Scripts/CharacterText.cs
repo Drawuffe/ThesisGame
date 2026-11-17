@@ -9,7 +9,8 @@ public class CharacterText : MonoBehaviour
 
     public Image characterImage;
     public TextMeshProUGUI characterName;
-    public TextMeshProUGUI characterInfo;
+    public TextMeshProUGUI want1, want2, want3;
+
 
    
 }

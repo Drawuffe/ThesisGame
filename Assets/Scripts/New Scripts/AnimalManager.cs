@@ -51,27 +51,29 @@ public class AnimalManager : MonoBehaviour
         characterStored = GetComponent<CharacterStored>();
         currentImage = GetComponent<Image>();
 
-        if(transform.parent.name == "Characters")
+        
+        
+        if(requirmentsMeet == true)
         {
-            currentImage.sprite = characterStored.characterSprite;
-
+            
+            print(characterStored.characterName + "requirements complete");
+            currentImage.sprite = happySprite;
+            
         }
         else
         {
-            if(requirmentsMeet == true)
-            {
-                
-                print(characterStored.characterName + "requirements complete");
-                currentImage.sprite = happySprite;
-                
-            }
-            else
-            {
-                currentImage.sprite = sadSprite;
-            }
+            currentImage.sprite = sadSprite;
         }
         
         
+        
+    }
+
+    public void SetSpriteDefault()
+    {
+        characterStored = GetComponent<CharacterStored>();
+        currentImage = GetComponent<Image>();
+        currentImage.sprite = characterStored.characterSprite;
     }
     public void StoreWants(string name, bool row, bool col, bool neigh, Sprite happyImage, Sprite sadImage)
     {
@@ -111,6 +113,8 @@ public class AnimalManager : MonoBehaviour
         {
             Destroy(neighCollider.gameObject); 
         }
+
+        GameManager.Instance.animalList.Add(this.gameObject);
         
     }
 

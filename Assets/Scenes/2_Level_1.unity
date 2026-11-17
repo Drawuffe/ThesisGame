@@ -357,6 +357,8 @@ MonoBehaviour:
   animalList: []
   completionImage: {fileID: 1233045769}
   completionImageAnimals: {fileID: 273121095}
+  completionImageAnimalRequirements: {fileID: 1296341344}
+  completionImagePipeRequirements: {fileID: 989398940}
   audioController: {fileID: 34971487}
   characterMoving: 0
   characterInfo: {fileID: 0}
@@ -11362,6 +11364,18 @@ PrefabInstance:
       propertyPath: 'characters.Array.data[5]'
       value: 
       objectReference: {fileID: 11400000, guid: 5b12b6902b17d43208a15353c9c82941, type: 2}
+    - target: {fileID: 6344072366902200953, guid: aacc9b059bf374a60b7c77dd08259a41, type: 3}
+      propertyPath: m_Spacing.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344072366902200953, guid: aacc9b059bf374a60b7c77dd08259a41, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344072366902200953, guid: aacc9b059bf374a60b7c77dd08259a41, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> animalList =  new List<GameObject>();
     public Image completionImage;
     public Image completionImageAnimals;
+    public Image completionImageAnimalRequirements;
+    public Image completionImagePipeRequirements;
     public AudioController audioController;
     public bool characterMoving = false;
     public CharacterInfo characterInfo;
@@ -87,6 +89,26 @@ public class GameManager : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.R))
         {
+            foreach (GameObject obj in animalList)
+            {
+                if (obj != null)
+                {
+                    foreach (Transform child in obj.transform)
+                    {
+                        AnimalCollision anCol = child.gameObject.GetComponent<AnimalCollision>();
+                        anCol.animalCollision = false;
+                        anCol.animalRoom = false;
+                        anCol.animalColRow = false;
+                        anCol.animalSmell = false;
+                        
+                    }
+
+                    AnimalManager aniMan = obj.GetComponent<AnimalManager>();
+                    aniMan.SetSpriteDefault();
+                    
+                }
+
+            }
             foreach (GameObject obj in addedBurrowList)
             {
                 if (obj != null)
@@ -101,10 +123,12 @@ public class GameManager : MonoBehaviour
                     Destroy(obj);
                 }
             }
+            
             addedBurrowList.Clear();
             Reset();
         }
 
+        CheckForCompletion();
     
     }
 
@@ -283,6 +307,8 @@ public class GameManager : MonoBehaviour
             roomPieceButtons.SetActive(false);
             audioController.PlayAudio(1);
             CheckForCompletion();
+            
+            
         }
 
     }
@@ -315,6 +341,7 @@ public class GameManager : MonoBehaviour
         allColliders.Clear();
         BurrowAdd();
         ReparentAnimals();
+
         
     }
 
@@ -356,6 +383,14 @@ public class GameManager : MonoBehaviour
         {
             completionImageAnimals.enabled = false;
         }
+        if(AnimalRequirementCheck() == true)
+        {
+            WhenCompleteAnimalRequirement();
+        }
+        else
+        {
+            completionImageAnimalRequirements.enabled = false;
+        }
     }
 
     public bool CheckAnimalCompletion()
@@ -376,6 +411,32 @@ public class GameManager : MonoBehaviour
             {
                 
                 if (!script.colliding)
+                {
+                    return false; 
+                    
+                }
+            }
+            else
+            {
+                
+                return false; 
+            }
+        }
+
+        return true; 
+    }
+
+    public bool AnimalRequirementCheck()
+    {
+        foreach (GameObject go in animalList)
+        {
+            if (go == null) continue; 
+
+  
+            if (go.TryGetComponent<AnimalManager>(out var script))
+            {
+                
+                if (!script.requirmentsMeet)
                 {
                     return false; 
                     
@@ -417,6 +478,20 @@ public class GameManager : MonoBehaviour
             //Debug.Log("already complete");
         }
     }
+    private void WhenCompleteAnimalRequirement()
+    {
+        if(completionImageAnimalRequirements.enabled == false)
+        {
+            completionImageAnimalRequirements.enabled = true;
+            audioController.PlayAudio(4);
+        }
+        else
+        {
+            //Debug.Log("already complete");
+        }
+    }
+
+
 
     private void BurrowAdd()
     {

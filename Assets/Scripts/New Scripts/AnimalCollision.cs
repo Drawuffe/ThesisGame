@@ -184,6 +184,17 @@ public class AnimalCollision : MonoBehaviour
             return;
         }
         
+        Transform grandparent = transform.parent.parent;
+        if(grandparent.name == "Characters")
+        {
+            return;
+        }
+
+        if(other.transform.parent.parent.name == "Characters")
+        {
+            return;
+        }
+        
         if(other.gameObject.GetComponentInParent<CharacterStored>()!=null)
         {
             if(other.gameObject.GetComponentInParent<CharacterStored>().animalCollsionName == characterStored.characterName)
@@ -220,6 +231,6 @@ public class AnimalCollision : MonoBehaviour
     private void HandleColliderLeft(Collider col)
     {
         animalRoom = false;
-        CheckRequirements();
+        animalManager.SetSpriteDefault();
     }
 }

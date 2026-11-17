@@ -32,7 +32,7 @@ public class CharacterStored : MonoBehaviour, IPointerClickHandler
         wantInfo_1 = want1;
         wantInfo_2 = want2;
         wantInfo_3 = want3;
-        wantInfo_3 = want4;
+        wantInfo_4 = want4;
         characterSprite = characterImage;
         totalPoints = points;
         animalCollsionName = collisionName;
@@ -48,8 +48,114 @@ public class CharacterStored : MonoBehaviour, IPointerClickHandler
     {
         //when an animal is clicked, then it updates the menu with the relavent information.
         characterText.characterImage.sprite = characterSprite;
-        characterText.characterInfo.text = wantInfo_1;
+        //characterText.characterInfo.text = wantInfo_1;
         characterText.characterName.text = characterName;
+        if(wantInfo_1 == "")
+        {
+            if(wantInfo_2 == "")
+            {
+                if(wantInfo_3 == "")
+                {
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want1.text = "No special requests.";
+                    }
+                    else
+                    {
+                        characterText.want1.text = wantInfo_4;
+                    }
+                }
+                else
+                {
+                    characterText.want1.text = wantInfo_3;
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want2.text = "";
+                    }
+                    else
+                    {
+                        characterText.want2.text = wantInfo_4;
+                    }
+                }
+            }
+            else
+            {
+                characterText.want1.text = wantInfo_2;
+                if(wantInfo_3 == "")
+                {
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want2.text = "";
+                    }
+                    else
+                    {
+                        characterText.want2.text = wantInfo_4;
+                    }
+                }
+                else
+                {
+                    characterText.want2.text = wantInfo_3;
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want3.text = "";
+                    }
+                    else
+                    {
+                        characterText.want3.text = wantInfo_4;
+                    }
+                }
+            }
+        }
+        else
+        {
+            characterText.want1.text = wantInfo_1;
+            if(wantInfo_2 == "")
+            {
+                if(wantInfo_3 == "")
+                {
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want2.text = "";
+                    }
+                    else
+                    {
+                        characterText.want2.text = wantInfo_4;
+                    }
+                }
+                else
+                {
+                    characterText.want2.text = wantInfo_3;
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want3.text = "";
+                    }
+                    else
+                    {
+                        characterText.want3.text = wantInfo_4;
+                    }
+                }
+            }
+            else
+            {
+                characterText.want2.text = wantInfo_2;
+                if(wantInfo_3 == "")
+                {
+                    if(wantInfo_4 == "")
+                    {
+                        characterText.want3.text = "";
+                    }
+                    else
+                    {
+                        characterText.want3.text = wantInfo_4;
+                    }
+                }
+                else
+                {
+                    characterText.want3.text = wantInfo_3;
+                }
+            }
+        }
+        
 
     }
 
